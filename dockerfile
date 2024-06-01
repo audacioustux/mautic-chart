@@ -100,6 +100,8 @@ VOLUME /var/www/html/config
 VOLUME /var/www/html/var/logs
 VOLUME /var/www/html/docroot/media
 
+ENV MAUTIC_TRUSTED_PROXIES '[ "0.0.0.0/0", "::/0" ]'
+
 ### Mautic Web
 FROM core as web
 
