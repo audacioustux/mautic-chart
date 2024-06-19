@@ -1,4 +1,4 @@
-{{- if not .Values,mautic.db.existingConfigMap }}
+{{- if not .Values.mautic.db.existingConfigMap }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
