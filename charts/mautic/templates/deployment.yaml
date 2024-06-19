@@ -36,22 +36,39 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.mautic.web.image.repository }}:web-{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.mautic.web.image.pullPolicy }}
-          {{- if .Values.env }}
-          env:
-            {{- toYaml .Values.env | nindent 12 }}
-          {{- end }}
-          {{- if .Values.envFrom }}
           envFrom:
-            {{- toYaml .Values.envFrom | nindent 12 }}
-            {{- if not .Values.mautic.mysql.auth.existingSecret }}
-            - secretRef:
-                name: {{ include "mautic.fullname" . }}-mysql
-            {{- end }}
-            {{- if not .Values.mautic.mysql.connection.existingConfigMap }}
+            # DB ConfigMap
+            {{- if .Values.mautic.db.existingConfigMap }}
             - configMapRef:
-                name: {{ include "mautic.fullname" . }}-mysql
+                name: {{ .Values.mautic.db.existingConfigMap }}
+            {{- else }} 
+            - configMapRef:
+                name: {{ include "mautic.fullname" . }}-db
             {{- end }}
-          {{- end }}
+            # DB Secret
+            {{- if .Values.mautic.db.existingSecret }}
+            - secretRef:
+                name: {{ .Value.mautic.db.existingSecret }}
+            {{- else }}
+            - secretRef:
+                name: {{ include "mautic.fullname" . }}-db
+            {{- end }}
+            # Maustic ConfigMap
+            {{- if .Values.mautic.existingConfigMap }}
+            - configMapRef:
+                name: {{ .Values.mautic.existingConfigMap }}
+            {{- else }}
+            - configMapRef:
+                name: {{ include "mautic.fullname" . }}-config
+            {{- end }}
+            # Mautic Secret
+            {{- if .Values.mautic.existingSecret }}
+            - secretRef:
+                name: {{ .Values.mautic.existingSecret }}
+            {{- else }}
+            - secretRef:
+                name: {{ include "mautic.fullname" . }}-secret
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

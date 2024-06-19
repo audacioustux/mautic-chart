@@ -5,25 +5,37 @@
 replicaCount: 1
 
 mautic:
+  # existingConfigMap: ""
+  # ignore the following values if existingConfigMap is set
+  configMap:
+    MAUTIC_URL: http://localhost:8080
+    MAUTIC_MESSENGER_DSN_EMAIL: "doctrine://default"
+    MAUTIC_MESSENGER_DSN_HIT: "doctrine://default"
+  
+  # existingSecret: ""
+  # ignore the following values if existingSecret is set
+  secret:
+    MAUTIC_ADMIN_EMAIL: "contact@example.com"
+    MAUTIC_ADMIN_PASSWORD: "admin"
+
   web:
     image:
       repository: audacioustux/mautic
       pullPolicy: IfNotPresent
 
-  mysql:
-    connection:
-      # existingConfigMap: ""
-      # if existingConfigMap is set, the values below are the keys in the existing config map,
-      # otherwise the values are used as is
-      host: mysql
-      port: 3306
-    auth:
-      # existingSecret: ""
-      # if existingSecret is set, the values below are the keys in the existing secret,
-      # otherwise the values are used as is
-      user: mautic
-      password: mautic
-      database: mautic
+  db:
+    # existingConfigMap: ""
+    # ignore the following values if existingConfigMap is set
+    configMap:
+      MAUTIC_DB_HOST: mysql
+      MAUTIC_DB_PORT: 3306
+
+    # existingSecret: ""
+    # ignore the following values if existingSecret is set
+    secret:
+      MAUTIC_DB_USER: mautic
+      MAUTIC_DB_PASSWORD: mautic
+      MAUTIC_DB_DATABASE: mautic
 
 imagePullSecrets: []
 nameOverride: ""

@@ -1,13 +1,17 @@
-{{- if not .Values,mautic.mysql.connection.existingConfigMap }}
+{{- if not .Values,mautic.db.existingConfigMap }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "mautic.fullname" . }}-mysql
+  name: {{ include "mautic.fullname" . }}-db
 data:
-  {{- if .Values.mautic.mysql.connection.host }}
-  MAUTIC_DB_HOST: {{ .Values.mautic.mysql.connection.host | quote }}
-  {{- end }}
-  {{- if .Values.mautic.mysql.connection.port }}
-  MAUTIC_DB_PORT: {{ .Values.mautic.mysql.connection.port | quote }}
-  {{- end }}
+{{- toYaml .Values.mautic.db.configMap | nindent 2 }}
+{{- end }}
+---
+{{- if not .Values.mautic.existingConfigMap }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mautic.fullname" . }}-config
+data:
+{{- toYaml .Values.mautic.configMap | nindent 2 }}
 {{- end }}
