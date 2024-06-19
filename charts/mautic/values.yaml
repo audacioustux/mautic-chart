@@ -20,7 +20,7 @@ mautic:
 
   web:
     image:
-      repository: audacioustux/mautic
+      repository: tanjim/mautic
       pullPolicy: IfNotPresent
 
   db:
