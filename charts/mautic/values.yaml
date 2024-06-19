@@ -4,11 +4,26 @@
 
 replicaCount: 1
 
-image:
-  repository: audacioustux/mautic
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+mautic:
+  web:
+    image:
+      repository: audacioustux/mautic
+      pullPolicy: IfNotPresent
+
+  mysql:
+    connection:
+      # existingConfigMap: ""
+      # if existingConfigMap is set, the values below are the keys in the existing config map,
+      # otherwise the values are used as is
+      host: mysql
+      port: 3306
+    auth:
+      # existingSecret: ""
+      # if existingSecret is set, the values below are the keys in the existing secret,
+      # otherwise the values are used as is
+      user: mautic
+      password: mautic
+      database: mautic
 
 imagePullSecrets: []
 nameOverride: ""
@@ -38,20 +53,6 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-
-env: []
-  # - name: MY_POD_IP
-  #   valueFrom:
-  #     secretKeyRef:
-  #       name: my-pod-ip
-  #       key: ip
-  # - name: MY_NODE_NAME
-  #   value: "my-node-name-value"
-envFrom: []
-  # - configMapRef:
-  #     name: configmap
-  # - secretRef:
-  #     name: secret
 
 service:
   type: ClusterIP

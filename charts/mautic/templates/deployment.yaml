@@ -34,8 +34,8 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.mautic.web.image.repository }}:web-{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.mautic.web.image.pullPolicy }}
           {{- if .Values.env }}
           env:
             {{- toYaml .Values.env | nindent 12 }}
@@ -43,6 +43,14 @@ spec:
           {{- if .Values.envFrom }}
           envFrom:
             {{- toYaml .Values.envFrom | nindent 12 }}
+            {{- if not .Values.mautic.mysql.auth.existingSecret }}
+            - secretRef:
+                name: {{ include "mautic.fullname" . }}-mysql
+            {{- end }}
+            {{- if not .Values.mautic.mysql.connection.existingConfigMap }}
+            - configMapRef:
+                name: {{ include "mautic.fullname" . }}-mysql
+            {{- end }}
           {{- end }}
           ports:
             - name: http
