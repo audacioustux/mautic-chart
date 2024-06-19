@@ -12,7 +12,7 @@ the latest versions of the packages.  You can then run `helm search repo mautic`
 
 To install the mautic chart:
 
-    helm install mautic audacioustux/mautic
+    helm install mautic mautic/mautic
 
 To uninstall the chart:
 
