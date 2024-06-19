@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "mautic.fullname" . }}-logs
+spec:
+  accessModes:
+  - {{ .Values.mautic.persistence.accessMode | quote }}
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: {{ .Values.mautic.persistence.storageClass | quote }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "mautic.fullname" . }}-files
+spec:
+  accessModes:
+  - {{ .Values.mautic.persistence.accessMode | quote }}
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: {{ .Values.mautic.persistence.storageClass | quote }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "mautic.fullname" . }}-images
+spec:
+  accessModes:
+  - {{ .Values.mautic.persistence.accessMode | quote }}
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: {{ .Values.mautic.persistence.storageClass | quote }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "mautic.fullname" . }}-config
+spec:
+  accessModes:
+  - {{ .Values.mautic.persistence.accessMode | quote }}
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: {{ .Values.mautic.persistence.storageClass | quote }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "mautic.fullname" . }}-tmp
+spec:
+  accessModes:
+  - {{ .Values.mautic.persistence.accessMode | quote }}
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: {{ .Values.mautic.persistence.storageClass | quote }}

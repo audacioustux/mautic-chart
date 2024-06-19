@@ -1,16 +1,8 @@
-apiVersion: apps/v1
-kind: Deployment
+kind: Job
+apiVersion: batch/v1
 metadata:
-  name: {{ include "mautic.fullname" . }}
-  labels:
-    {{- include "mautic.labels" . | nindent 4 }}
+  name: {{ include "mautic.fullname" . }}-install
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
-  selector:
-    matchLabels:
-      {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -34,7 +26,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.mautic.image.repository }}:web-{{ .Chart.AppVersion }}"
+          image: "{{ .Values.mautic.image.repository }}:install-{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
           envFrom:
             # DB ConfigMap
@@ -69,16 +61,8 @@ spec:
             - secretRef:
                 name: {{ include "mautic.fullname" . }}-secret
             {{- end }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
-          livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
-          readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
-            {{- toYaml .Values.mautic.web.resources | nindent 12 }}
+            {{- toYaml .Values.mautic.install.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
@@ -112,6 +96,7 @@ spec:
           persistentVolumeClaim:
             claimName: {{ include "mautic.fullname" . }}-tmp
       {{- end }}
+      restartPolicy: OnFailure
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
