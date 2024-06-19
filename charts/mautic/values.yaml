@@ -28,7 +28,7 @@ mautic:
     # ignore the following values if existingConfigMap is set
     configMap:
       MAUTIC_DB_HOST: mysql
-      MAUTIC_DB_PORT: 3306
+      MAUTIC_DB_PORT: "3306"
 
     # existingSecret: ""
     # ignore the following values if existingSecret is set
