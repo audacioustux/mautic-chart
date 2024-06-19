@@ -2,7 +2,7 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/?repo=audacioustux%2Fdevcontainers&ref=master)  
 
-![Release](https://github.com/audacioustux/devcontainers/actions/workflows/release.yaml/badge.svg)
+![Release](https://github.com/audacioustux/mautic-chart/actions/workflows/release.yml/badge.svg)
 
 ## Usage
 
