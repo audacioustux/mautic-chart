@@ -29,7 +29,6 @@ spec:
           image: "{{ .Values.mautic.image.repository }}:install-{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
           env:
-            {{- if .Values.mautic.db.create }}
             - name: CREATE_DB
               value: {{ .Values.mautic.db.create | quote }}
           envFrom:
@@ -66,7 +65,7 @@ spec:
                 name: {{ include "mautic.fullname" . }}-secret
             {{- end }}
           resources:
-            {{- toYaml .Values.mautic.install.resources | nindent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
