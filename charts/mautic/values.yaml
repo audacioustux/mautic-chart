@@ -21,9 +21,9 @@ mautic:
   persistence:
     # options: ReadWriteOnce, ReadWriteMany
     # replicaCount should be 1 when using ReadWriteOnce
-    accessMode: ReadWriteOnce
+    accessMode: ReadWriteMany
     # example: efs, nfs, ebs
-    # storageClass: ""
+    storageClass: "efs"
 
   web:
     resources: {}
