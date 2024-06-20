@@ -21,9 +21,9 @@ mautic:
   persistence:
     # options: ReadWriteOnce, ReadWriteMany
     # replicaCount should be 1 when using ReadWriteOnce
-    accessMode: ReadWriteMany
+    accessMode: ReadWriteOnce
     # example: efs, nfs, ebs
-    storageClass: "" 
+    # storageClass: "" 
 
   web:
     resources: {}
@@ -47,13 +47,13 @@ mautic:
     configMap:
       MAUTIC_DB_HOST: mysql
       MAUTIC_DB_PORT: "3306"
+      MAUTIC_DB_DATABASE: mautic
 
     # existingSecret: ""
     # ignore the following values if existingSecret is set
     secret:
       MAUTIC_DB_USER: mautic
       MAUTIC_DB_PASSWORD: mautic
-      MAUTIC_DB_DATABASE: mautic
 
 imagePullSecrets: []
 nameOverride: ""
