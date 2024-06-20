@@ -28,6 +28,10 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.mautic.image.repository }}:install-{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
+          env:
+            {{- if .Values.mautic.db.create }}
+            - name: CREATE_DB
+              value: {{ .Values.mautic.db.create | quote }}
           envFrom:
             # DB ConfigMap
             {{- if .Values.mautic.db.existingConfigMap }}
