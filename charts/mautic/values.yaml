@@ -23,7 +23,7 @@ mautic:
     # replicaCount should be 1 when using ReadWriteOnce
     accessMode: ReadWriteOnce
     # example: efs, nfs, ebs
-    # storageClass: "" 
+    # storageClass: ""
 
   web:
     resources: {}

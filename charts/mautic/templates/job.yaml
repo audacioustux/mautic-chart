@@ -66,9 +66,7 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
             - mountPath: /var/www/html/var/logs
               name: logs
             - mountPath: /var/www/html/docroot/media/files
@@ -79,10 +77,7 @@ spec:
               name: config
             - mountPath: /var/www/html/docroot/var/tmp
               name: tmp
-          {{- end }}
-      {{- with .Values.volumes }}
       volumes:
-        {{- toYaml . | nindent 8 }}
         - name: logs
           persistentVolumeClaim:
             claimName: {{ include "mautic.fullname" . }}-logs
@@ -98,7 +93,6 @@ spec:
         - name: tmp
           persistentVolumeClaim:
             claimName: {{ include "mautic.fullname" . }}-tmp
-      {{- end }}
       restartPolicy: OnFailure
       {{- with .Values.nodeSelector }}
       nodeSelector:
