@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   mautic:
   - apiVersion: v2
+    appVersion: 0.1.4
+    created: "2024-06-20T08:07:57.111103631Z"
+    description: A Helm chart for Kubernetes
+    digest: 65f717502275cf9a7da5f1a19fc2f118efd3022d2c68aa7e9445422fd5a2219d
+    name: mautic
+    type: application
+    urls:
+    - https://github.com/audacioustux/mautic-chart/releases/download/mautic-0.2.20/mautic-0.2.20.tgz
+    version: 0.2.20
+  - apiVersion: v2
     appVersion: 0.1.2
     created: "2024-06-20T07:23:46.145379175Z"
     description: A Helm chart for Kubernetes
@@ -201,4 +211,4 @@ entries:
     urls:
     - https://github.com/audacioustux/k8s-mautic/releases/download/mautic-0.2.0/mautic-0.2.0.tgz
     version: 0.2.0
-generated: "2024-06-20T07:23:46.145492796Z"
+generated: "2024-06-20T08:07:57.112016433Z"
