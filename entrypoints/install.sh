@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-set -eax
-
 # wait untill the db is fully up before proceeding
 while [[ $(mysqladmin --host=$MAUTIC_DB_HOST --port=$MAUTIC_DB_PORT --user=$MAUTIC_DB_USER --password=$MAUTIC_DB_PASSWORD ping) != "mysqld is alive" ]]; do
 	sleep 1
 done
 
 if [ "$CREATE_DB" = true ]; then
+    echo "Creating database $MAUTIC_DB_NAME"
     mysql -h $MAUTIC_DB_HOST -P $MAUTIC_DB_PORT -u $MAUTIC_DB_USER -p$MAUTIC_DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $MAUTIC_DB_NAME;"
 fi
 

@@ -19,11 +19,8 @@ mautic:
     MAUTIC_ADMIN_PASSWORD: "admin"
 
   persistence:
-    # options: ReadWriteOnce, ReadWriteMany
-    # replicaCount should be 1 when using ReadWriteOnce
     accessMode: ReadWriteMany
-    # example: efs, nfs, ebs
-    storageClass: "efs"
+    storageClass: "nfs"
 
   web:
     resources: {}
@@ -107,11 +104,11 @@ ingress:
 
 livenessProbe:
   httpGet:
-    path: /
+    path: /s/login
     port: http
 readinessProbe:
   httpGet:
-    path: /
+    path: /s/login
     port: http
 
 autoscaling:
