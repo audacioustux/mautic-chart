@@ -1,7 +1,9 @@
 kind: Job
 apiVersion: batch/v1
 metadata:
-  name: {{ include "mautic.fullname" . }}-install
+  generateName: {{ include "mautic.fullname" . }}-install-
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
 spec:
   template:
     metadata:
