@@ -51,7 +51,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 RUN echo "memory_limit = -1" > /usr/local/etc/php/php.ini
 
 # Define Mautic version by package tag
-ARG MAUTIC_VERSION=5.x-dev
+ARG MAUTIC_VERSION=5.1
 
 WORKDIR /opt
 # Install Mautic
@@ -94,11 +94,6 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 
 # Enable Apache Rewrite Module
 RUN a2enmod rewrite
-
-# Define Mautic volumes to persist data
-VOLUME /var/www/html/config
-VOLUME /var/www/html/var/logs
-VOLUME /var/www/html/docroot/media
 
 ENV MAUTIC_TRUSTED_PROXIES '[ "0.0.0.0/0", "::/0" ]'
 
