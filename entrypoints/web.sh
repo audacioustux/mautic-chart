@@ -7,4 +7,6 @@ while [ ! -f $config_file ]; do
 	sleep 1
 done
 
+php bin/sync_config.sh
+
 apache2-foreground

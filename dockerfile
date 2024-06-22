@@ -87,6 +87,8 @@ WORKDIR /var/www/html
 COPY --from=builder --chown=www-data:www-data /opt/mautic .
 RUN mv node_modules docroot/
 
+COPY ./bin/sync_config.php bin/sync_config.php
+
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/docroot
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf

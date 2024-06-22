@@ -13,16 +13,11 @@ fi
 config_file=config/local.php
 
 if [ -f $config_file ]; then
-    echo $config_file already exists, skipping
+    echo $config_file already exists, skipping installation...
 else
+    php bin/sync_config.sh
+
     php bin/console mautic:install \
-        --db_host=${MAUTIC_DB_HOST:?} \
-        --db_port=${MAUTIC_DB_PORT:?} \
-        --db_name=${MAUTIC_DB_NAME:?} \
-        --db_user=${MAUTIC_DB_USER:?} \
-        --db_password=${MAUTIC_DB_PASSWORD:?} \
-        --admin_email=${MAUTIC_ADMIN_EMAIL:?} \
-        --admin_password=${MAUTIC_ADMIN_PASSWORD:?} \
         --no-interaction \
         --force \
         ${MAUTIC_URL:?} 

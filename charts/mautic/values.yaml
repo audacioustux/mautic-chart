@@ -4,17 +4,26 @@ mautic:
   image:
     repository: tanjim/mautic
     pullPolicy: IfNotPresent
-  
+
   # existingConfigMap: ""
   # ignore the following values if existingConfigMap is set
   configMap:
-    MAUTIC_URL: http://localhost:8080
+    # site
+    MAUTIC_SITE_URL: http://localhost:8080
+    # messenger
     MAUTIC_MESSENGER_DSN_EMAIL: "doctrine://default"
     MAUTIC_MESSENGER_DSN_HIT: "doctrine://default"
+    # mailer
+    # MAUTIC_MAILER_TRANSPORT: smtp
+    # MAUTIC_MAILER_HOST: ""
+    # MAUTIC_MAILER_PORT: 25
+    # MAUTIC_MAILER_USER: ""
+    # MAUTIC_MAILER_PASSWORD: ""
   
   # existingSecret: ""
   # ignore the following values if existingSecret is set
   secret:
+    # admin
     MAUTIC_ADMIN_EMAIL: "contact@example.com"
     MAUTIC_ADMIN_PASSWORD: "admin"
 
@@ -44,6 +53,7 @@ mautic:
     # ignore the following values if existingConfigMap is set
     configMap:
       MAUTIC_DB_HOST: mysql
+      # MAUTIC_DB_HOST_RO: mysql-ro
       MAUTIC_DB_PORT: "3306"
       MAUTIC_DB_NAME: mautic
 
