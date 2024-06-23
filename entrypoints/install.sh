@@ -16,5 +16,5 @@ else
     php bin/console mautic:install \
         --no-interaction \
         --force \
-        ${MAUTIC_URL:?} 
+        ${MAUTIC_SITE_URL:?} 
 fi

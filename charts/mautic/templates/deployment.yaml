@@ -36,6 +36,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.mautic.image.repository }}:web-{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
+          enableServiceLinks: false
           envFrom:
             # DB ConfigMap
             {{- if .Values.mautic.db.existingConfigMap }}
