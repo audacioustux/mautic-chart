@@ -11,7 +11,6 @@
     foreach (getenv() as $key => $value) {
         if (strpos($key, $prefix) === 0) {
             $key = strtolower(substr($key, $prefixLength));
-            echo "Setting $key to $value" . PHP_EOL;
             $parameters[$key] = json_decode($value) ?: $value;
         }
     }
