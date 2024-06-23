@@ -39,14 +39,14 @@ mautic:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
-    # livenessProbe:
-    #   httpGet:
-    #     path: /s/login
-    #     port: http
-    # readinessProbe:
-    #   httpGet:
-    #     path: /s/login
-    #     port: http
+    livenessProbe:
+      httpGet:
+        path: /s/login
+        port: http
+    readinessProbe:
+      httpGet:
+        path: /s/login
+        port: http
 
   install:
     resources: {}
