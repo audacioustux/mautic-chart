@@ -76,11 +76,11 @@ spec:
               protocol: TCP
           {{- if .Values.mautic.web.livenessProbe }}
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.mautic.web.livenessProbe | nindent 12 }}
           {{- end }}
           {{- if .Values.mautic.web.readinessProbe }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.mautic.web.readinessProbe | nindent 12 }}
           {{- end }}
           resources:
             {{- toYaml .Values.mautic.web.resources | nindent 12 }}
