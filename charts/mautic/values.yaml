@@ -39,13 +39,18 @@ mautic:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
-    # TODO: use proper probes
-    livenessProbe:
-      tcpSocket:
-        port: 80
-    readinessProbe:
-      tcpSocket:
-        port: 80
+    livenessProbe: &healthcheck
+      exec:
+        # check if request to /s/login returns 301
+        command: 
+          - sh
+          - -c
+          - |
+            if [ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/s/login)" != "301" ]; then
+              exit 1
+            fi
+      initialDelaySeconds: 10
+    readinessProbe: *healthcheck
     # TODO: not implemented yet
     # session:
     #   savePath: "tcp://redis:6379"
