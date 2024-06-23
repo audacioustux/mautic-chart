@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "mautic.fullname" . }}
+  name: {{ include "mautic.fullname" . }}-web
   labels:
     {{- include "mautic.labels" . | nindent 4 }}
 spec:
