@@ -96,6 +96,8 @@ spec:
               name: config
             - mountPath: /var/www/html/var/cache
               name: cache
+            - mountPath: /tmp/sessions
+              name: sessions
       volumes:
         {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
@@ -112,6 +114,9 @@ spec:
         - name: cache
           persistentVolumeClaim:
             claimName: {{ include "mautic.fullname" . }}-cache
+        - name: sessions
+          persistentVolumeClaim:
+            claimName: {{ include "mautic.fullname" . }}-sessions
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

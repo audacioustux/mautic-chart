@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: 2
 
 mautic:
   image:
@@ -39,12 +39,17 @@ mautic:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
+    # TODO: use proper probes
     livenessProbe:
       tcpSocket:
         port: 80
     readinessProbe:
       tcpSocket:
         port: 80
+    # TODO: not implemented yet
+    # session:
+    #   savePath: "tcp://redis:6379"
+    #   saveHandler: "redis"
 
   install:
     resources: {}
