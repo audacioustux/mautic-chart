@@ -39,6 +39,15 @@ mautic:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
+    # livenessProbe:
+    #   httpGet:
+    #     path: /s/login
+    #     port: http
+    # readinessProbe:
+    #   httpGet:
+    #     path: /s/login
+    #     port: http
+
   install:
     resources: {}
       # limits:
@@ -111,15 +120,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-livenessProbe: {}
-  # httpGet:
-  #   path: /s/login
-  #   port: http
-readinessProbe: {}
-  # httpGet:
-  #   path: /s/login
-  #   port: http
 
 autoscaling:
   enabled: false
