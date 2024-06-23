@@ -43,10 +43,12 @@ mautic:
       httpGet:
         path: /s/login
         port: http
+        scheme: HTTPS
     readinessProbe:
       httpGet:
         path: /s/login
         port: http
+        scheme: HTTPS
 
   install:
     resources: {}
