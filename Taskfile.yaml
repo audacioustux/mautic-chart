@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  buildx:init:
+    cmds:
+      - docker buildx create --name multiarch --bootstrap --use
+  docker:build:
+    env:
+      VERSION: 0.1.8
+    cmds:
+      - docker build --platform linux/amd64,linux/arm64 --builder=multiarch -t docker.io/tanjim/mautic:console-$VERSION --target=console --push .
+      - docker build --platform linux/amd64,linux/arm64 --builder=multiarch -t docker.io/tanjim/mautic:install-$VERSION --target=install --push .
+      - docker build --platform linux/amd64,linux/arm64 --builder=multiarch -t docker.io/tanjim/mautic:web-$VERSION --target=web --push .

@@ -13,7 +13,8 @@
 			"dockerDashComposeVersion": "v2"
 		},
 		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
-		"ghcr.io/audacioustux/devcontainers/common-utils-extras:1": {}
+		"ghcr.io/audacioustux/devcontainers/common-utils-extras:1": {},
+		"ghcr.io/audacioustux/devcontainers/taskfile": {}
 	},
 	"updateContentCommand": "git clean -Xdf --exclude='!**/*.env'"
 	// Features to add to the dev container. More info: https://containers.dev/features.

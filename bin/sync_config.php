@@ -9,7 +9,6 @@
     $prefix = 'MAUTIC_';
     $prefixLength = strlen($prefix);
     foreach (getenv() as $key => $value) {
-        echo "Found $key" . PHP_EOL;
         if (strpos($key, $prefix) === 0) {
             $key = strtolower(substr($key, $prefixLength));
             echo "Setting $key to $value" . PHP_EOL;
