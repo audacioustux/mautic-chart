@@ -73,6 +73,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm /etc/cron.daily/*
 
+ENV PHP_INI_VALUE_DATE_TIMEZONE=UTC \
+    PHP_INI_VALUE_UPLOAD_MAX_FILESIZE=512M \
+    PHP_INI_VALUE_POST_MAX_FILESIZE=512M \
+    PHP_INI_VALUE_MEMORY_LIMIT=512M \
+    PHP_INI_VALUE_MAX_EXECUTION_TIME=300 \
+    PHP_INI_VALUE_SESSION_SAVE_PATH=/tmp/sessions \
+    PHP_INI_VALUE_SESSION_SAVE_HANDLER=files
+
 COPY ./common/php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /var/www/html
