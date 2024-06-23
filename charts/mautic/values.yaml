@@ -39,7 +39,7 @@ mautic:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
-    livenessProbe: &healthcheck
+    readinessProbe: *healthcheck
       exec:
         # check if request to /s/login returns 301
         command: 
@@ -50,7 +50,8 @@ mautic:
               exit 1
             fi
       initialDelaySeconds: 10
-    readinessProbe: *healthcheck
+    # livenessProbe: &healthcheck
+
     # TODO: not implemented yet
     # session:
     #   savePath: "tcp://redis:6379"
