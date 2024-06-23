@@ -33,3 +33,15 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: {{ .Values.mautic.persistence.storageClass | quote }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "mautic.fullname" . }}-cache
+spec:
+  accessModes:
+  - {{ .Values.mautic.persistence.accessMode | quote }}
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: {{ .Values.mautic.persistence.storageClass | quote }}
