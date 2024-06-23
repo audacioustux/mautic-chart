@@ -40,15 +40,11 @@ mautic:
       #   cpu: 100m
       #   memory: 128Mi
     livenessProbe:
-      httpGet:
-        path: /s/login
-        port: http
-        scheme: HTTPS
+      tcpSocket:
+        port: 80
     readinessProbe:
-      httpGet:
-        path: /s/login
-        port: http
-        scheme: HTTPS
+      tcpSocket:
+        port: 80
 
   install:
     resources: {}
