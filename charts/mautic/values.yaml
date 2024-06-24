@@ -46,7 +46,7 @@ mautic:
       targetCPUUtilizationPercentage: 80
       # targetMemoryUtilizationPercentage: 80
 
-    readinessProbe: *healthcheck
+    readinessProbe: &healthcheck
       exec:
         # check if request to /s/login returns 301
         command: 
