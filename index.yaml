@@ -3,6 +3,16 @@ entries:
   mautic:
   - apiVersion: v2
     appVersion: 0.1.15
+    created: "2024-06-24T21:36:50.445266354Z"
+    description: Mautic is an open-source marketing automation software.
+    digest: 829c1b0452cc6c0a06c384479c12c50a5027730ffdb5d92143c0fa03ca1ae53c
+    name: mautic
+    type: application
+    urls:
+    - https://github.com/audacioustux/mautic-chart/releases/download/mautic-0.2.49/mautic-0.2.49.tgz
+    version: 0.2.49
+  - apiVersion: v2
+    appVersion: 0.1.15
     created: "2024-06-24T17:56:47.998887794Z"
     description: A Helm chart for Kubernetes
     digest: 406d59b1cfd2ad92431c83b4a2b0f1d99b1a3eb0c7bf2198af6b25acbffaa5bb
@@ -451,4 +461,4 @@ entries:
     urls:
     - https://github.com/audacioustux/k8s-mautic/releases/download/mautic-0.2.0/mautic-0.2.0.tgz
     version: 0.2.0
-generated: "2024-06-24T17:56:47.999356272Z"
+generated: "2024-06-24T21:36:50.445712389Z"
