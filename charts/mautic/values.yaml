@@ -1,4 +1,4 @@
-replicaCount: 2
+replicaCount: 1
 
 mautic:
   image:
@@ -29,16 +29,23 @@ mautic:
 
   persistence:
     accessMode: ReadWriteMany
-    storageClass: "nfs"
+    # example: efs, nfs, etc.
+    # storageClass: "nfs"
 
   web:
     resources: {}
       # limits:
-      #   cpu: 100m
-      #   memory: 128Mi
+      #   memory: 1Gi
       # requests:
-      #   cpu: 100m
-      #   memory: 128Mi
+      #   cpu: 500m
+      #   memory: 256Gi
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 10
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
     readinessProbe: *healthcheck
       exec:
         # check if request to /s/login returns 301
@@ -58,6 +65,7 @@ mautic:
     #   saveHandler: "redis"
 
   install:
+    enabled: true
     resources: {}
       # limits:
       #   cpu: 100m
@@ -129,13 +137,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
 volumes: []

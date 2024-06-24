@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-echo "waiting for db server..."
-while [[ $(mysqladmin --host=$MAUTIC_DB_HOST --port=$MAUTIC_DB_PORT --user=$MAUTIC_DB_USER --password=$MAUTIC_DB_PASSWORD ping) != "mysqld is alive" ]]; do
-    echo -n "."
-	sleep 1
+# create $MAUTIC_DB_NAME database if it doesn't exist
+# keep retrying until the db server is up
+while ! mysqladmin --host=$MAUTIC_DB_HOST --port=$MAUTIC_DB_PORT --user=$MAUTIC_DB_USER --password=$MAUTIC_DB_PASSWORD create $MAUTIC_DB_NAME; do
+    echo "waiting for db server..."
+    sleep 1
 done
 
 config_file=config/local.php

@@ -1,8 +1,8 @@
-{{- if .Values.autoscaling.enabled }}
+{{- if .Values.mautic.web.autoscaling.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "mautic.fullname" . }}
+  name: {{ include "mautic.fullname" . }}-web
   labels:
     {{- include "mautic.labels" . | nindent 4 }}
 spec:
@@ -10,23 +10,23 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ include "mautic.fullname" . }}
-  minReplicas: {{ .Values.autoscaling.minReplicas }}
-  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  minReplicas: {{ .Values.mautic.web.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.mautic.web.autoscaling.maxReplicas }}
   metrics:
-    {{- if .Values.autoscaling.targetCPUUtilizationPercentage }}
+    {{- if .Values.mautic.web.autoscaling.targetCPUUtilizationPercentage }}
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
+          averageUtilization: {{ .Values.mautic.web.autoscaling.targetCPUUtilizationPercentage }}
     {{- end }}
-    {{- if .Values.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- if .Values.mautic.web.autoscaling.targetMemoryUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
+          averageUtilization: {{ .Values.mautic.web.autoscaling.targetMemoryUtilizationPercentage }}
     {{- end }}
 {{- end }}
