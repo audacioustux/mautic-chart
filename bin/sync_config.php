@@ -1,8 +1,8 @@
 <?php
     // include config/local.php, and get the $parameters array
-    $localConfig = __DIR__ . '/../config/local.php';
-    if (file_exists($localConfig)) {
-        require_once $localConfig;
+    $localConfigFile = __DIR__ . '/../config/local.php';
+    if (file_exists($localConfigFile)) {
+        require $localConfigFile;
     } else {
         $parameters = [];
     }
@@ -21,5 +21,5 @@
 
     // sync the $parameters array to the local.php file
     $rendered = '<?php' . PHP_EOL . '$parameters = ' . var_export($parameters, true) . ';' . PHP_EOL;
-    file_put_contents($localConfig, $rendered);
+    file_put_contents($localConfigFile, $rendered);
 ?>

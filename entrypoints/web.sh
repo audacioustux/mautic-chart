@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-config_file=config/local.php
-
-echo "Looking for $config_file..."
-while [ ! -f $config_file ]; do
-	sleep 5
-done
+if php bin/is_installed.php; then
+    echo "Mautic is already installed. Skipping installation..."
+    exit 0
+fi
 
 php bin/sync_config.php
 

@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-config_file=config/local.php
-
-if [ -f $config_file ]; then
-    echo $config_file already exists, skipping installation...
+if php bin/is_installed.php; then
+    echo "Mautic is already installed. Skipping installation..."
     exit 0
 fi
 

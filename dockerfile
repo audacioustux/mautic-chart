@@ -88,7 +88,7 @@ WORKDIR /var/www/html
 COPY --from=builder --chown=www-data:www-data /opt/mautic .
 RUN mv node_modules docroot/
 
-COPY ./bin/sync_config.php bin/sync_config.php
+COPY ./bin/ bin/
 
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/docroot
 
