@@ -8,8 +8,6 @@ mautic:
   # existingConfigMap: ""
   # ignore the following values if existingConfigMap is set
   configMap:
-    # site
-    MAUTIC_SITE_URL: http://localhost:8080
     # messenger
     MAUTIC_MESSENGER_DSN_EMAIL: "doctrine://default"
     MAUTIC_MESSENGER_DSN_HIT: "doctrine://default"
@@ -65,6 +63,7 @@ mautic:
     #   saveHandler: "redis"
 
   install:
+    siteUrl: "https://localhost:8080"
     resources: {}
       # limits:
       #   cpu: 100m
