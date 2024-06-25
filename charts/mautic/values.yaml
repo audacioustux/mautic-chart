@@ -46,7 +46,7 @@ mautic:
 
     readinessProbe: &healthcheck
       exec:
-        # check if request to /s/login returns 301
+        # check if request to /s/login returns 301 (redirect) status code in 3 seconds
         command: 
           - sh
           - -c
@@ -54,7 +54,9 @@ mautic:
             if [ "$(curl -m 3 -s -o /dev/null -w ''%{http_code}'' http://localhost/s/login)" != "301" ]; then
               exit 1
             fi
-    # livenessProbe: &healthcheck
+    livenessProbe:
+      tcpSocket:
+        port: 80
 
     # TODO: not implemented yet
     # session:
