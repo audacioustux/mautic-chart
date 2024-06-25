@@ -17,7 +17,6 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      ttlSecondsAfterFinished: 120
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
