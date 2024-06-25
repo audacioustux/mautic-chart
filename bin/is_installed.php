@@ -13,4 +13,6 @@ $parameters = require $localConfigFile;
 if (empty($params['db_driver']) || empty($params['site_url'])) {
     exit(1);
 }
+
+exit(0);
 ?>

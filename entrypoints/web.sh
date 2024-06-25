@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if php bin/is_installed.php; then
-    echo "Mautic is already installed. Skipping installation..."
-    exit 0
-fi
+echo "Waiting for Mautic to be installed..."
+until php bin/is_installed.php; do
+	sleep 5
+done
 
 php bin/sync_config.php
 
