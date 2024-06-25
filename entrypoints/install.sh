@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 if php bin/is_installed.php; then
     echo "Mautic is already installed. Skipping installation..."
     exit 0

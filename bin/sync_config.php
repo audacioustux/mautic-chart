@@ -1,11 +1,12 @@
 <?php
     // include config/local.php, and get the $parameters array
     $localConfigFile = __DIR__ . '/../config/local.php';
-    if (file_exists($localConfigFile)) {
-        require $localConfigFile;
-    } else {
-        $parameters = [];
+    // create $localConfigFile if it does not exist
+    if (!file_exists($localConfigFile)) {
+        file_put_contents($localConfigFile, '<?php' . PHP_EOL . '$parameters = array();' . PHP_EOL, LOCK_EX);
     }
+
+    require $localConfigFile;
 
     // get all the environment variables starting with MAUTIC_
     // take the part after MAUTIC_ and convert it to lowercase as the key

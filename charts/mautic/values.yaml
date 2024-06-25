@@ -40,7 +40,7 @@ mautic:
     autoscaling:
       enabled: false
       minReplicas: 1
-      maxReplicas: 10
+      maxReplicas: 20
       targetCPUUtilizationPercentage: 80
       # targetMemoryUtilizationPercentage: 80
 
