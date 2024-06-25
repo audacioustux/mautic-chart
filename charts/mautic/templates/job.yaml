@@ -30,7 +30,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.mautic.image.repository }}:install-{{ .Chart.AppVersion }}"
           args:
-            - {{- .Values.mautic.install.siteUrl | quote }}
+            - {{ .Values.mautic.install.siteUrl | quote }}
           imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
           envFrom:
             # DB ConfigMap
