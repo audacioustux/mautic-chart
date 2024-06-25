@@ -99,10 +99,10 @@ spec:
               name: images
             - mountPath: /var/www/html/config
               name: config
-            - mountPath: /var/www/html/var/cache
-              name: cache
-            - mountPath: /var/www/html/var/tmp
-              name: tmp
+            # - mountPath: /var/www/html/var/cache
+            #   name: cache
+            # - mountPath: /var/www/html/var/tmp
+            #   name: tmp
             - mountPath: /tmp/sessions
               name: sessions
       volumes:
@@ -118,12 +118,12 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: {{ include "mautic.fullname" . }}-config
-        - name: cache
-          persistentVolumeClaim:
-            claimName: {{ include "mautic.fullname" . }}-cache
-        - name: tmp
-          persistentVolumeClaim:
-            claimName: {{ include "mautic.fullname" . }}-tmp
+        # - name: cache
+        #   persistentVolumeClaim:
+        #     claimName: {{ include "mautic.fullname" . }}-cache
+        # - name: tmp
+        #   persistentVolumeClaim:
+        #     claimName: {{ include "mautic.fullname" . }}-tmp
         - name: sessions
           persistentVolumeClaim:
             claimName: {{ include "mautic.fullname" . }}-sessions
