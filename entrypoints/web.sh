@@ -9,4 +9,6 @@ done
 
 php bin/sync_config.php
 
+php bin/console cache:warmup -n --no-ansi
+
 apache2-foreground
