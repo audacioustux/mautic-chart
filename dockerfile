@@ -106,7 +106,7 @@ FROM core as web
 COPY ./entrypoints/web.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT exec /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 ### Mautic Install
 FROM core as install
@@ -114,7 +114,7 @@ FROM core as install
 COPY ./entrypoints/install.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT exec /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 ### Mautic CLI
 FROM core as console

@@ -2,7 +2,7 @@
 
 config_file=config/local.php
 
-echo "Waiting for config file to be created..."
+echo "Looking for $config_file..."
 while [ ! -f $config_file ]; do
 	sleep 5
 done

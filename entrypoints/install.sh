@@ -14,6 +14,7 @@ done
 
 php bin/sync_config.php
 
+echo "Provided arguments: $@"
 php bin/console mautic:install \
     --no-interaction \
     --force \
