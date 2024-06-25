@@ -2,7 +2,7 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "mautic.fullname" . }}-web
+  name: {{ include "mautic.fullname" . }}
   labels:
     {{- include "mautic.labels" . | nindent 4 }}
 spec:
