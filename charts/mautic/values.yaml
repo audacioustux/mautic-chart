@@ -40,8 +40,8 @@ mautic:
     autoscaling:
       enabled: false
       minReplicas: 1
-      maxReplicas: 10
-      targetCPUUtilizationPercentage: 80
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 60
       # targetMemoryUtilizationPercentage: 80
 
     readinessProbe: &healthcheck
@@ -51,7 +51,7 @@ mautic:
           - sh
           - -c
           - |
-            if [ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/s/login)" != "301" ]; then
+            if [ "$(curl -m 3 -s -o /dev/null -w ''%{http_code}'' http://localhost/s/login)" != "301" ]; then
               exit 1
             fi
       initialDelaySeconds: 10
