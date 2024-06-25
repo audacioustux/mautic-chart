@@ -21,5 +21,5 @@
 
     // sync the $parameters array to the local.php file
     $rendered = '<?php' . PHP_EOL . '$parameters = ' . var_export($parameters, true) . ';' . PHP_EOL;
-    file_put_contents($localConfigFile, $rendered);
+    file_put_contents($localConfigFile, $rendered, LOCK_EX);
 ?>
