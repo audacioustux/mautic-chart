@@ -5,7 +5,7 @@ if (!file_exists($localConfigFile)) {
     exit(1);
 }
 
-$parameters = require $localConfigFile;
+require $localConfigFile;
 
 // if db_driver and site_url are present then it is assumed all the steps of the installation have been
 // performed; manually deleting these values or deleting the config file will be required to re-enter
