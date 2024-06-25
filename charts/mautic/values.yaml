@@ -46,12 +46,12 @@ mautic:
 
     readinessProbe: &healthcheck
       exec:
-        # check if request to /s/login returns 301 (redirect) status code in 5 seconds
+        # check if request to /s/login returns 301 (redirect) status code in 3 seconds
         command: 
           - sh
           - -c
           - |
-            if [ "$(curl -m 5 -s -o /dev/null -w ''%{http_code}'' http://localhost/s/login)" != "301" ]; then
+            if [ "$(curl -m 3 -s -o /dev/null -w ''%{http_code}'' http://localhost/s/login)" != "301" ]; then
               exit 1
             fi
     livenessProbe:
