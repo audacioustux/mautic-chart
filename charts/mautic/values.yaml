@@ -56,7 +56,7 @@ mautic:
             fi
     livenessProbe:
       tcpSocket:
-        port: 80
+        port: http
 
     # TODO: not implemented yet
     # session:
