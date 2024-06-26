@@ -7,3 +7,11 @@
 ## Usage
 
 Visit [https://audacioustux.github.io/mautic-chart](https://audacioustux.github.io/mautic-chart) for more information.
+
+## TODO
+
+- [ ] Add GitHub Actions for Container Image Release
+- [ ] Add GitHub Actions for Helm Chart Testing
+- [ ] Add helm chart values documentation
+- [ ] Add Kubernetes CronJob for Mautic Cron Jobs
+- [ ] Cache var/tmp and var/cache directories for all pods
