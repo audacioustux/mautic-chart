@@ -30,6 +30,7 @@ CPU Usage             |  Memory Usage
 - [ ] Add GitHub Actions for Helm Chart Testing
 - [ ] Add automated Helm chart documentation generation
 - [ ] Add Kubernetes CronJob for Mautic Cron Jobs
+    - Use tanjim/mautic:console image for bin/console commands
 - [ ] Cache var/tmp and var/cache directories for all pods
     - Tested with nfs/efs - too slow (need to retest)
 - [ ] Create chart and container image for every Mautic release
