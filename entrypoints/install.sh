@@ -17,4 +17,4 @@ php bin/sync_config.php
 php bin/console mautic:install \
     --no-interaction \
     --force \
-    "$@"
+    ${SITE_URL:-"$@"}
