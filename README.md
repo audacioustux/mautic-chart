@@ -8,6 +8,13 @@
 
 Visit [https://audacioustux.github.io/mautic-chart](https://audacioustux.github.io/mautic-chart) for more information.
 
+## Benchmark
+
+K6 Script and report is available in the `misc` directory.
+
+<!-- embed misc/mautic-lt-ramp.png -->
+![Mautic Load Test](misc/mautic-lt-ramp.png)
+
 ## TODO
 
 - [ ] Add GitHub Actions for Container Image Release
