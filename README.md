@@ -36,3 +36,4 @@ CPU Usage             |  Memory Usage
 - [ ] Create chart and container image for every Mautic release
     - Including dev channel
 - [ ] Cleanup / Refactor
+- [ ] Add docker-compose for non-k8s users
