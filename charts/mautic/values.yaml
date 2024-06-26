@@ -41,7 +41,7 @@ mautic:
       #   memory: 512Gi
     autoscaling:
       enabled: false
-      minReplicas: 1
+      minReplicas: 2
       maxReplicas: 10
       targetCPUUtilizationPercentage: 80
       # targetMemoryUtilizationPercentage: 80
