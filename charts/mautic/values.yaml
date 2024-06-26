@@ -36,7 +36,7 @@ mautic:
       #   memory: 1Gi
       # requests:
       #   cpu: 500m
-      #   memory: 256Gi
+      #   memory: 512Gi
     autoscaling:
       enabled: false
       minReplicas: 1
