@@ -14,8 +14,10 @@ Container Images are available at [hub.docker.com](https://hub.docker.com/reposi
 
 K6 Script and report is available in the `misc` directory.
 
-<!-- embed misc/mautic-lt-ramp.png -->
 ![Mautic Load Test](misc/mautic-lt-ramp.png)
+![AWS Aurora ACU Usage](misc/mautic-lt-ramp-aurora.png)
+![CPU Usage](misc/mautic-lt-ramp-cpu.png)
+![Memory Usage](misc/mautic-lt-ramp-mem.png)
 
 ## TODO
 
