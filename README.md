@@ -21,7 +21,10 @@ K6 Script and report is available in the `misc` directory.
 
 - [ ] Add GitHub Actions for Container Image Release
 - [ ] Add GitHub Actions for Helm Chart Testing
-- [ ] Add helm chart values documentation
+- [ ] Add automated Helm chart documentation generation
 - [ ] Add Kubernetes CronJob for Mautic Cron Jobs
 - [ ] Cache var/tmp and var/cache directories for all pods
-- [ ] Create chart and container image for every (including dev channel) Mautic release
+    - tested with nfs/efs - too slow (needs review)
+- [ ] Create chart and container image for every Mautic release
+    - including dev channel
+- [ ] Cleanup / Refactor
