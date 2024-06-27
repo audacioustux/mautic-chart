@@ -29,7 +29,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.mautic.image.repository }}:install-{{ .Chart.AppVersion }}"
+          image: "{{ .Values.mautic.image.repository }}:install-{{ .Values.mautic.image.tag }}"
           args:
             - {{ .Values.mautic.install.siteUrl | quote }}
           imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
