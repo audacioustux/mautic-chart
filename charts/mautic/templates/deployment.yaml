@@ -87,6 +87,10 @@ spec:
           readinessProbe:
             {{- toYaml .Values.mautic.web.readinessProbe | nindent 12 }}
           {{- end }}
+          {{- if .Values.mautic.web.startupProbe }}
+          startupProbe:
+            {{- toYaml .Values.mautic.web.startupProbe | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.mautic.web.resources | nindent 12 }}
           volumeMounts:

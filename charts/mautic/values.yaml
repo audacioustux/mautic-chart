@@ -46,7 +46,7 @@ mautic:
       targetCPUUtilizationPercentage: 80
       # targetMemoryUtilizationPercentage: 80
 
-    readinessProbe: &healthcheck
+    readinessProbe:
       exec:
         # check if request to /s/login returns 301 (redirect) status code in 1 seconds
         command: 
@@ -56,9 +56,13 @@ mautic:
             if [ "$(curl -m 1 -s -o /dev/null -w ''%{http_code}'' http://localhost/s/login)" != "301" ]; then
               exit 1
             fi
-    livenessProbe:
+    livenessProbe: &livecheck
       tcpSocket:
         port: http
+    startupProbe:
+      <<: *livecheck
+      failureThreshold: 30
+      periodSeconds: 10
 
     # TODO: not implemented yet
     # session:
