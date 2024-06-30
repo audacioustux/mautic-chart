@@ -1,0 +1,23 @@
+{{- if .Values.mautic.web.vpa.enabled }}
+kind: VerticalPodAutoscaler
+apiVersion: autoscaling.k8s.io/v1
+metadata:
+  name: {{ include "mautic.fullname" . }}
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: {{ include "mautic.fullname" . }}
+  updatePolicy:
+    updateMode: "Auto"
+  resourcePolicy:
+    containerPolicies:
+      - containerName: "*"
+        controlledResources: ["memory"]
+        minAllowed:
+          memory: {{ .Values.mautic.web.vpa.minMemory | quote }}
+        maxAllowed:
+          memory: {{ .Values.mautic.web.vpa.maxMemory | quote }}
+{{- end }}

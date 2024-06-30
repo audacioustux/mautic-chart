@@ -40,12 +40,15 @@ mautic:
       # requests:
       #   cpu: 500m
       #   memory: 512Gi
-    autoscaling:
-      enabled: false
+    hpa:
+      enabled: true
       minReplicas: 2
       maxReplicas: 10
-      targetCPUUtilizationPercentage: 80
-      # targetMemoryUtilizationPercentage: 80
+      targetCPU: 80
+    vpa:
+      enabled: false
+      minMemory: 256Mi
+      maxMemory: 1Gi
 
     readinessProbe:
       exec:

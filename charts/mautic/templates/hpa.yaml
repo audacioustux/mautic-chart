@@ -1,4 +1,4 @@
-{{- if .Values.mautic.web.autoscaling.enabled }}
+{{- if .Values.mautic.web.hpa.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -10,23 +10,13 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ include "mautic.fullname" . }}
-  minReplicas: {{ .Values.mautic.web.autoscaling.minReplicas }}
-  maxReplicas: {{ .Values.mautic.web.autoscaling.maxReplicas }}
+  minReplicas: {{ .Values.mautic.web.hpa.minReplicas }}
+  maxReplicas: {{ .Values.mautic.web.hpa.maxReplicas }}
   metrics:
-    {{- if .Values.mautic.web.autoscaling.targetCPUUtilizationPercentage }}
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: {{ .Values.mautic.web.autoscaling.targetCPUUtilizationPercentage }}
-    {{- end }}
-    {{- if .Values.mautic.web.autoscaling.targetMemoryUtilizationPercentage }}
-    - type: Resource
-      resource:
-        name: memory
-        target:
-          type: Utilization
-          averageUtilization: {{ .Values.mautic.web.autoscaling.targetMemoryUtilizationPercentage }}
-    {{- end }}
+          averageUtilization: {{ .Values.mautic.web.hpa.targetCPU }}
 {{- end }}

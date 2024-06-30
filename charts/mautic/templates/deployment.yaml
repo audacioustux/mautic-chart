@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "mautic.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.mautic.web.autoscaling.enabled }}
+  {{- if not .Values.mautic.web.hpa.enabled }}
   replicas: {{ .Values.replicaCount }}
   strategy:
     type: RollingUpdate
