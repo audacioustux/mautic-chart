@@ -35,20 +35,16 @@ mautic:
 
   web:
     resources:
-      # limits:
-      #   memory: 1Gi
+      limits:
+        memory: 1Gi
       requests:
         cpu: 500m
-        # memory: 512Gi
+        memory: 512Gi
     hpa:
       enabled: true
       minReplicas: 2
       maxReplicas: 10
       targetCPU: 80
-    vpa:
-      enabled: false
-      minMemory: 256Mi
-      maxMemory: 1Gi
 
     readinessProbe: &probe
       # check if request to /s/login returns 301 (redirect) status code
@@ -69,21 +65,15 @@ mautic:
       failureThreshold: 30
       periodSeconds: 10
 
-    # TODO: not implemented yet
-    # session:
-    #   savePath: "tcp://redis:6379"
-    #   saveHandler: "redis"
-
   install:
     # optional, if SITE_URL is not set in configMap
     siteUrl: "https://localhost:8080"
-    resources: {}
-      # limits:
-      #   cpu: 100m
-      #   memory: 128Mi
-      # requests:
-      #   cpu: 100m
-      #   memory: 128Mi
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
   db:
     create: true
     # existingConfigMap: ""
