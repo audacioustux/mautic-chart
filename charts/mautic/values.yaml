@@ -34,12 +34,12 @@ mautic:
     # storageClass: "nfs"
 
   web:
-    resources: {}
+    resources:
       # limits:
       #   memory: 1Gi
-      # requests:
-      #   cpu: 500m
-      #   memory: 512Gi
+      requests:
+        cpu: 500m
+        # memory: 512Gi
     hpa:
       enabled: true
       minReplicas: 2
