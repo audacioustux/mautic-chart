@@ -50,21 +50,22 @@ mautic:
       minMemory: 256Mi
       maxMemory: 1Gi
 
-    readinessProbe:
+    readinessProbe: &probe
+      # check if request to /s/login returns 301 (redirect) status code
       exec:
-        # check if request to /s/login returns 301 (redirect) status code in 1 seconds
         command: 
           - sh
           - -c
           - |
-            if [ "$(curl -m 1 -s -o /dev/null -w ''%{http_code}'' http://localhost/s/login)" != "301" ]; then
+            if [ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/s/login)" != "301" ]; then
               exit 1
             fi
-    livenessProbe: &livecheck
-      tcpSocket:
-        port: http
+      timeoutSeconds: 2
+    livenessProbe:
+      <<: *probe
+      timeoutSeconds: 10
     startupProbe:
-      <<: *livecheck
+      <<: *probe
       failureThreshold: 30
       periodSeconds: 10
 
