@@ -1,5 +1,3 @@
-replicaCount: 1
-
 mautic:
   image:
     repository: tanjim/mautic
@@ -49,7 +47,6 @@ mautic:
       enabled: false
       minMemory: 128Mi
       maxMemory: 1024Mi
-
     readinessProbe: &probe
       # check if request to /s/login returns 301 (redirect) status code
       exec:
@@ -78,6 +75,7 @@ mautic:
       requests:
         cpu: 100m
         memory: 256Mi
+
   db:
     create: true
     # existingConfigMap: ""
@@ -93,6 +91,12 @@ mautic:
     secret:
       MAUTIC_DB_USER: mautic
       MAUTIC_DB_PASSWORD: mautic
+  
+  cron:
+    import:
+      enabled: true
+      schedule: "*/1 * * * *"
+      limit: 100
 
 imagePullSecrets: []
 nameOverride: ""

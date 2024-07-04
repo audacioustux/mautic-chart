@@ -60,3 +60,84 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Volumes
+*/}}
+{{- define "mautic.volumes" -}}
+{{- with .Values.volumes }}
+{{- toYaml . }}
+{{- end -}}
+- name: files
+  persistentVolumeClaim:
+    claimName: {{ include "mautic.fullname" . }}-files
+- name: images
+  persistentVolumeClaim:
+    claimName: {{ include "mautic.fullname" . }}-images
+- name: config
+  persistentVolumeClaim:
+    claimName: {{ include "mautic.fullname" . }}-config
+- name: cache
+  persistentVolumeClaim:
+    claimName: {{ include "mautic.fullname" . }}-cache
+- name: sessions
+  persistentVolumeClaim:
+    claimName: {{ include "mautic.fullname" . }}-sessions
+{{- end }}
+
+{{/*
+Volume mounts
+*/}}
+{{- define "mautic.volumeMounts" -}}
+{{- with .Values.volumeMounts }}
+{{- toYaml . }}
+{{- end -}}
+- mountPath: /var/www/html/docroot/media/files
+  name: files
+- mountPath: /var/www/html/docroot/media/images
+  name: images
+- mountPath: /var/www/html/config
+  name: config
+- mountPath: /var/www/html/var/cache
+  name: cache
+- mountPath: /tmp/sessions
+  name: sessions
+{{- end }}
+
+{{/*
+EnvFrom
+*/}}
+{{- define "mautic.envFrom" -}}
+# DB ConfigMap
+{{- if .Values.mautic.db.existingConfigMap }}
+- configMapRef:
+    name: {{ .Values.mautic.db.existingConfigMap }}
+{{- else }} 
+- configMapRef:
+    name: {{ include "mautic.fullname" . }}-db
+{{- end }}
+# DB Secret
+{{- if .Values.mautic.db.existingSecret }}
+- secretRef:
+    name: {{ .Value.mautic.db.existingSecret }}
+{{- else }}
+- secretRef:
+    name: {{ include "mautic.fullname" . }}-db
+{{- end }}
+# Maustic ConfigMap
+{{- if .Values.mautic.existingConfigMap }}
+- configMapRef:
+    name: {{ .Values.mautic.existingConfigMap }}
+{{- else }}
+- configMapRef:
+    name: {{ include "mautic.fullname" . }}-config
+{{- end }}
+# Mautic Secret
+{{- if .Values.mautic.existingSecret }}
+- secretRef:
+    name: {{ .Values.mautic.existingSecret }}
+{{- else }}
+- secretRef:
+    name: {{ include "mautic.fullname" . }}-secret
+{{- end }}
+{{- end }}
