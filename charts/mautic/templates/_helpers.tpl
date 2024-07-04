@@ -83,6 +83,9 @@ Volumes
 - name: sessions
   persistentVolumeClaim:
     claimName: {{ include "mautic.fullname" . }}-sessions
+- name: import
+  persistentVolumeClaim:
+    claimName: {{ include "mautic.fullname" . }}-import
 {{- end }}
 
 {{/*
@@ -102,6 +105,8 @@ Volume mounts
   name: cache
 - mountPath: /tmp/sessions
   name: sessions
+- mountPath: /var/www/html/var/import
+  name: import
 {{- end }}
 
 {{/*
