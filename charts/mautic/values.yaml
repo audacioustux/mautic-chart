@@ -36,15 +36,19 @@ mautic:
   web:
     resources:
       limits:
-        memory: 1Gi
+        memory: 384Mi
       requests:
-        cpu: 500m
-        memory: 512Gi
+        cpu: 200m
+        memory: 256Mi
     hpa:
       enabled: true
-      minReplicas: 2
+      minReplicas: 1
       maxReplicas: 10
       targetCPU: 80
+    vpa:
+      enabled: false
+      minMemory: 128Mi
+      maxMemory: 1024Mi
 
     readinessProbe: &probe
       # check if request to /s/login returns 301 (redirect) status code
