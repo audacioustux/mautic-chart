@@ -11,7 +11,7 @@ php bin/console mautic:install \
     --db-name=${MAUTIC_DB_NAME:?} \
     --db-user=${MAUTIC_DB_USER:?} \
     --db-password=${MAUTIC_DB_PASSWORD:?} \
-    --admin-username=${MAUTIC_ADMIN_USER:?} \
+    --admin-username=${MAUTIC_ADMIN_USERNAME:?} \
     --admin-email=${MAUTIC_ADMIN_EMAIL:?} \
     --admin-password=${MAUTIC_ADMIN_PASSWORD:?} \
     --no-interaction \
