@@ -10,10 +10,8 @@
         exit(1);
     }
 
-    sleep(100);
-    print_r($parameters);
-
-    require $localConfigFile;
+    $parameters = array();
+    include $localConfigFile;
 
     // get all the environment variables starting with MAUTIC_
     // take the part after MAUTIC_ and convert it to lowercase as the key
