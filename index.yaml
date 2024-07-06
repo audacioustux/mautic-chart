@@ -3,6 +3,19 @@ entries:
   mautic:
   - apiVersion: v2
     appVersion: "5.1"
+    created: "2024-07-06T17:50:34.652847104Z"
+    description: Mautic is an open-source marketing automation software.
+    digest: 5d0df8287d92d6f5a170116e4e6b74765d5eb5273c97bce58903a0aa136253d1
+    maintainers:
+    - email: contact+helm_mautic@audacioustux.com
+      name: Tanjim H.
+    name: mautic
+    type: application
+    urls:
+    - https://github.com/audacioustux/mautic-chart/releases/download/mautic-5.1.21/mautic-5.1.21.tgz
+    version: 5.1.21
+  - apiVersion: v2
+    appVersion: "5.1"
     created: "2024-07-06T14:56:24.064244071Z"
     description: Mautic is an open-source marketing automation software.
     digest: e2d018f7f6eedf8d4a8fd3f0de675bec5d82b33d3349a9c30e1217344ee59397
@@ -913,4 +926,4 @@ entries:
     urls:
     - https://github.com/audacioustux/k8s-mautic/releases/download/mautic-0.2.0/mautic-0.2.0.tgz
     version: 0.2.0
-generated: "2024-07-06T14:56:24.064726449Z"
+generated: "2024-07-06T17:50:34.653181627Z"
