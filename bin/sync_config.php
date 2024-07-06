@@ -11,7 +11,9 @@
     }
 
     $parameters = array();
-    include $localConfigFile;
+    if (file_exists($localConfigFile)) {
+        require $localConfigFile;
+    }
 
     // get all the environment variables starting with MAUTIC_
     // take the part after MAUTIC_ and convert it to lowercase as the key
