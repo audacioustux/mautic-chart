@@ -1,10 +1,17 @@
 <?php
     // include config/local.php, and get the $parameters array
     $localConfigFile = __DIR__ . '/../config/local.php';
-    // create $localConfigFile if it does not exist
-    if (!file_exists($localConfigFile)) {
-        file_put_contents($localConfigFile, '<?php' . PHP_EOL . '$parameters = array();' . PHP_EOL, LOCK_EX);
+
+    // flock a .lock file to prevent multiple instances of this script from running at the same time
+    // atomic file locking
+    $lockFile = $localConfigFile . '.lock';
+    $lock = fopen($lockFile, 'w');
+    if (!flock($lock, LOCK_EX | LOCK_NB)) {
+        exit(1);
     }
+
+    sleep(100);
+    print_r($parameters);
 
     require $localConfigFile;
 
@@ -22,5 +29,10 @@
 
     // sync the $parameters array to the local.php file
     $rendered = '<?php' . PHP_EOL . '$parameters = ' . var_export($parameters, true) . ';' . PHP_EOL;
-    file_put_contents($localConfigFile, $rendered, LOCK_EX);
+    file_put_contents($localConfigFile, $rendered);
+
+    // release the lock
+    flock($lock, LOCK_UN);
+    fclose($lock);
+    unlink($lockFile);
 ?>

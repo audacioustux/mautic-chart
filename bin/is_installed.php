@@ -10,6 +10,4 @@
     if (empty($parameters['db_driver']) || empty($parameters['site_url'])) {
         exit(1);
     }
-
-    exit(0);
 ?>
