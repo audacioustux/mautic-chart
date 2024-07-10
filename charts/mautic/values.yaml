@@ -131,6 +131,10 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 3600
 
 ingress:
   enabled: enabled

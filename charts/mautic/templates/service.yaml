@@ -13,3 +13,5 @@ spec:
       name: http
   selector:
     {{- include "mautic.selectorLabels" . | nindent 4 }}
+  sessionAffinity: {{ .Values.service.sessionAffinity }}
+  sessionAffinityConfig: {{ .Values.service.sessionAffinityConfig | toYaml | nindent 4 }}
