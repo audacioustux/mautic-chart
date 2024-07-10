@@ -97,7 +97,7 @@ mautic:
     import:
       enabled: true
       schedule: "*/1 * * * *"
-      limit: 1000
+      limit: 5000
 
 imagePullSecrets: []
 nameOverride: ""
