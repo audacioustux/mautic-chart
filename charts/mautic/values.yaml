@@ -96,11 +96,11 @@ mautic:
   cron:
     import:
       enabled: true
-      schedule: "*/1 * * * *"
+      schedule: "*/5 * * * *"
       # limit: 5000
     segmentsUpdate:
       enabled: true
-      schedule: "*/1 * * * *"
+      schedule: "*/7 * * * *"
       # batchLimit: 5000
       # maxContacts: 5000
 
