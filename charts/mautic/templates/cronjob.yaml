@@ -56,7 +56,13 @@ spec:
               {{- if .Values.mautic.cron.segmentsUpdate.batchLimit }}
               - --batch-limit
               - "{{ .Values.mautic.cron.segmentsUpdate.batchLimit }}"
-            {{- end }}
+              {{- end }}
+              {{- if .Values.mautic.cron.segmentsUpdate.maxContacts }}
+              - --max-contacts
+              - "{{ .Values.mautic.cron.segmentsUpdate.maxContacts }}"
+              {{- end }}
+              - --lock_mode
+              - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
