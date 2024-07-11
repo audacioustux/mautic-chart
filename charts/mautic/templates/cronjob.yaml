@@ -105,3 +105,41 @@ spec:
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
 {{- end }}
+---
+{{- if .Values.mautic.cron.campaignsRebuild.enabled }}
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: {{ include "mautic.fullname" . }}-campaigns-rebuild
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "{{ .Values.mautic.cron.campaignsRebuild.schedule }}"
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: console
+            image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
+            imagePullPolicy: "{{ .Values.mautic.image.pullPolicy }}"
+            args:
+              - mautic:campaigns:rebuild
+              {{- if .Values.mautic.cron.campaignsRebuild.batchLimit }}
+              - --batch-limit
+              - "{{ .Values.mautic.cron.campaignsRebuild.batchLimit }}"
+              {{- end }}
+              {{- if .Values.mautic.cron.campaignsRebuild.maxContacts }}
+              - --max-contacts
+              - "{{ .Values.mautic.cron.campaignsRebuild.maxContacts }}"
+              {{- end }}
+            envFrom:
+              {{- include "mautic.envFrom" . | nindent 14 }}
+            volumeMounts:
+              {{- include "mautic.volumeMounts" . | nindent 14 }}
+          restartPolicy: OnFailure
+          volumes:
+            {{- include "mautic.volumes" . | nindent 12 }}
+{{- end }}
