@@ -96,12 +96,12 @@ mautic:
   cron:
     import:
       enabled: true
-      schedule: "*/5 * * * *"
-      limit: 10000
+      schedule: "*/1 * * * *"
+      # limit: 5000
     segmentsUpdate:
       enabled: true
-      schedule: "*/5 * * * *"
-      batchLimit: 10000
+      schedule: "*/1 * * * *"
+      # batchLimit: 5000
 
 imagePullSecrets: []
 nameOverride: ""

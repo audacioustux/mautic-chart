@@ -18,9 +18,11 @@ spec:
             image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
             imagePullPolicy: "{{ .Values.mautic.image.pullPolicy }}"
             args:
-             - mautic:import
-             - --limit
-             - "{{ .Values.mautic.cron.import.limit }}"
+              - mautic:import
+              {{- if .Values.mautic.cron.import.limit }}
+              - --limit
+              - "{{ .Values.mautic.cron.import.limit }}"
+              {{- end }}
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
@@ -50,9 +52,11 @@ spec:
             image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
             imagePullPolicy: "{{ .Values.mautic.image.pullPolicy }}"
             args:
-             - mautic:segments:update
-             - --batch-limit
-             - "{{ .Values.mautic.cron.segmentsUpdate.batchLimit }}"
+              - mautic:segments:update
+              {{- if .Values.mautic.cron.segmentsUpdate.batchLimit }}
+              - --batch-limit
+              - "{{ .Values.mautic.cron.segmentsUpdate.batchLimit }}"
+            {{- end }}
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
