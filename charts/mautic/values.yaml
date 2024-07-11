@@ -103,6 +103,10 @@ mautic:
       schedule: "*/7 * * * *"
       # batchLimit: 5000
       # maxContacts: 5000
+    campaignsTrigger:
+      enabled: true
+      schedule: "*/1 * * * *"
+      # batchLimit: 5000
 
 imagePullSecrets: []
 nameOverride: ""
