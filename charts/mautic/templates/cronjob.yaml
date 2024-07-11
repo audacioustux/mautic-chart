@@ -29,3 +29,35 @@ spec:
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
 {{- end }}
+---
+{{- if .Values.mautic.cron.segmentsUpdate.enabled }}
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: {{ include "mautic.fullname" . }}-segments-update
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "{{ .Values.mautic.cron.segmentsUpdate.schedule }}"
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: console
+            image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
+            imagePullPolicy: "{{ .Values.mautic.image.pullPolicy }}"
+            args:
+             - mautic:segments:update
+             - --batch-limit
+             - "{{ .Values.mautic.cron.segmentsUpdate.batchLimit }}"
+            envFrom:
+              {{- include "mautic.envFrom" . | nindent 14 }}
+            volumeMounts:
+              {{- include "mautic.volumeMounts" . | nindent 14 }}
+          restartPolicy: OnFailure
+          volumes:
+            {{- include "mautic.volumes" . | nindent 12 }}
+{{- end }}
