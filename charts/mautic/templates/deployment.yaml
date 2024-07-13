@@ -15,28 +15,12 @@ spec:
       {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
         {{- include "mautic.labels" . | nindent 8 }}
-        {{- with .Values.podLabels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "mautic.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       enableServiceLinks: false
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.mautic.image.repository }}:web-{{ .Values.mautic.image.tag }}"
           imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
           envFrom:
@@ -63,15 +47,125 @@ spec:
             {{- include "mautic.volumeMounts" . | nindent 12 }}
       volumes: 
         {{- include "mautic.volumes" . | nindent 8 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+---
+{{- if .Values.mautic.messenger.consumeEmail.enabled }}
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ include "mautic.fullname" . }}-messenger-consume-email
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      {{- include "mautic.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mautic.labels" . | nindent 8 }}
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
+          imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
+          args:
+            - messenger:consume
+            - email
+            - --time-limit=300
+          envFrom:
+            {{- include "mautic.envFrom" . | nindent 12 }}
+          volumeMounts:
+            {{- include "mautic.volumeMounts" . | nindent 12 }}
+          restartPolicy: OnFailure
+          resources:
+            {{- toYaml .Values.mautic.messenger.consumeEmail.resources | nindent 12 }}
+      volumes:
+        {{- include "mautic.volumes" . | nindent 8 }}
+{{- end }}
+---
+{{- if .Values.mautic.messenger.consumeHit.enabled }}
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ include "mautic.fullname" . }}-messenger-consume-hit
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      {{- include "mautic.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mautic.labels" . | nindent 8 }}
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
+          imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
+          args:
+            - messenger:consume
+            - hit
+          envFrom:
+            {{- include "mautic.envFrom" . | nindent 12 }}
+          volumeMounts:
+            {{- include "mautic.volumeMounts" . | nindent 12 }}
+          restartPolicy: OnFailure
+          resources:
+            {{- toYaml .Values.mautic.messenger.consumeHit.resources | nindent 12 }}
+      volumes:
+        {{- include "mautic.volumes" . | nindent 8 }}
+{{- end }}
+---
+{{- if .Values.mautic.messenger.consumeFailed.enabled }}
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ include "mautic.fullname" . }}-messenger-consume-failed
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      {{- include "mautic.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mautic.labels" . | nindent 8 }}
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
+          imagePullPolicy: {{ .Values.mautic.image.pullPolicy }}
+          args:
+            - messenger:consume
+            - failed
+            - --time-limit=300
+          envFrom:
+            {{- include "mautic.envFrom" . | nindent 12 }}
+          volumeMounts:
+            {{- include "mautic.volumeMounts" . | nindent 12 }}
+          restartPolicy: OnFailure
+          resources:
+            {{- toYaml .Values.mautic.messenger.consumeFailed.resources | nindent 12 }}
+      volumes:
+        {{- include "mautic.volumes" . | nindent 8 }}
+{{- end }}

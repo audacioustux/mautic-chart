@@ -1,3 +1,6 @@
+nameOverride: ""
+fullnameOverride: ""
+
 mautic:
   image:
     repository: tanjim/mautic
@@ -12,12 +15,6 @@ mautic:
     # messenger
     MAUTIC_MESSENGER_DSN_EMAIL: "doctrine://default"
     MAUTIC_MESSENGER_DSN_HIT: "doctrine://default"
-    # mailer
-    # MAUTIC_MAILER_TRANSPORT: smtp
-    # MAUTIC_MAILER_HOST: ""
-    # MAUTIC_MAILER_PORT: 25
-    # MAUTIC_MAILER_USER: ""
-    # MAUTIC_MAILER_PASSWORD: ""
   
   # existingSecret: ""
   # ignore the following values if existingSecret is set
@@ -26,6 +23,8 @@ mautic:
     MAUTIC_ADMIN_USERNAME: "admin"
     MAUTIC_ADMIN_EMAIL: "contact@example.com"
     MAUTIC_ADMIN_PASSWORD: "admin"
+    # mailer
+    # MAUTIC_MAILER_DSN: "smtp://user:pass@localhost:587"
 
   persistence:
     accessMode: ReadWriteMany
@@ -112,35 +111,20 @@ mautic:
       schedule: "*/1 * * * *"
       # batchLimit: 5000
       # maxContacts: 5000
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Automatically mount a ServiceAccount's API credentials?
-  automount: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
-
-podAnnotations: {}
-podLabels: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+    broadcastsSend:
+      enabled: true
+      schedule: "*/1 * * * *"
+    messagesSend:
+      enabled: true
+      schedule: "*/1 * * * *"
+  
+  messenger:
+    consumeEmail:
+      enabled: true
+    consumeFailed:
+      enabled: true
+    consumeHit:
+      enabled: true
 
 service:
   type: ClusterIP
@@ -167,21 +151,3 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-# Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
-
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
