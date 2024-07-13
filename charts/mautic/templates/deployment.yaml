@@ -71,7 +71,6 @@ spec:
           args:
             - messenger:consume
             - email
-            - --time-limit=300
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
@@ -144,7 +143,6 @@ spec:
           args:
             - messenger:consume
             - failed
-            - --time-limit=300
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
