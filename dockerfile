@@ -59,7 +59,7 @@ RUN COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_PROCESS_TIMEOUT=10000 composer create-pr
 
 WORKDIR /opt/mautic
 # Plugins
-RUN COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_PROCESS_TIMEOUT=10000 composer require pabloveintimilla/mautic-amazon-ses:1.0.2
+RUN COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_PROCESS_TIMEOUT=10000 composer require pabloveintimilla/mautic-amazon-ses
 # clean up
 RUN rm -rf mauticvar/cache/js && \
     find node_modules -mindepth 1 -maxdepth 1 -not \( -name 'jquery' -or -name 'vimeo-froogaloop2' -or -name 'remixicon' \) | xargs rm -rf
