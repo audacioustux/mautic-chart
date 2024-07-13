@@ -76,7 +76,6 @@ spec:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
             {{- include "mautic.volumeMounts" . | nindent 12 }}
-          restartPolicy: OnFailure
           resources:
             {{- toYaml .Values.mautic.messenger.consumeEmail.resources | nindent 12 }}
       volumes:
@@ -113,7 +112,6 @@ spec:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
             {{- include "mautic.volumeMounts" . | nindent 12 }}
-          restartPolicy: OnFailure
           resources:
             {{- toYaml .Values.mautic.messenger.consumeHit.resources | nindent 12 }}
       volumes:
@@ -151,7 +149,6 @@ spec:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
             {{- include "mautic.volumeMounts" . | nindent 12 }}
-          restartPolicy: OnFailure
           resources:
             {{- toYaml .Values.mautic.messenger.consumeFailed.resources | nindent 12 }}
       volumes:
