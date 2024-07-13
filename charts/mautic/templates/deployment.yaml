@@ -7,9 +7,6 @@ metadata:
 spec:
   strategy:
     type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
   selector:
     matchLabels:
       {{- include "mautic.selectorLabels" . | nindent 6 }}
@@ -58,9 +55,6 @@ metadata:
 spec:
   strategy:
     type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
   selector:
     matchLabels:
       {{- include "mautic.selectorLabels" . | nindent 6 }}
@@ -99,9 +93,6 @@ metadata:
 spec:
   strategy:
     type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
   selector:
     matchLabels:
       {{- include "mautic.selectorLabels" . | nindent 6 }}
@@ -139,9 +130,6 @@ metadata:
 spec:
   strategy:
     type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
   selector:
     matchLabels:
       {{- include "mautic.selectorLabels" . | nindent 6 }}
