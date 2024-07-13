@@ -56,9 +56,13 @@ ARG MAUTIC_VERSION=5.1
 WORKDIR /opt
 # Install Mautic
 RUN COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_PROCESS_TIMEOUT=10000 composer create-project mautic/recommended-project:${MAUTIC_VERSION} mautic --no-interaction
+
+WORKDIR /opt/mautic
+# Plugins
+RUN COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_PROCESS_TIMEOUT=10000 composer require pabloveintimilla/mautic-amazon-ses:1.0.2
 # clean up
-RUN rm -rf mautic/var/cache/js && \
-    find mautic/node_modules -mindepth 1 -maxdepth 1 -not \( -name 'jquery' -or -name 'vimeo-froogaloop2' -or -name 'remixicon' \) | xargs rm -rf
+RUN rm -rf mauticvar/cache/js && \
+    find node_modules -mindepth 1 -maxdepth 1 -not \( -name 'jquery' -or -name 'vimeo-froogaloop2' -or -name 'remixicon' \) | xargs rm -rf
 
 FROM php:8.1-apache as core
 

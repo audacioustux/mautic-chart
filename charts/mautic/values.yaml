@@ -5,7 +5,7 @@ mautic:
   image:
     repository: tanjim/mautic
     pullPolicy: IfNotPresent
-    tag: "5.1.14"
+    tag: "5.1.15"
 
   # existingConfigMap: ""
   # ignore the following values if existingConfigMap is set
