@@ -75,6 +75,9 @@ Volumes
 - name: import
   persistentVolumeClaim:
     claimName: {{ include "mautic.fullname" . }}-import
+- name: logs
+  persistentVolumeClaim:
+    claimName: {{ include "mautic.fullname" . }}-logs
 {{- end }}
 
 {{/*
@@ -92,10 +95,12 @@ Volume mounts
   name: config
 - mountPath: /var/www/html/var/cache
   name: cache
-- mountPath: /tmp/sessions
+- mountPath: /var/www/html/var/sessions
   name: sessions
 - mountPath: /var/www/html/var/import
   name: import
+- mountPath: /var/www/html/var/logs
+  name: logs
 {{- end }}
 
 {{/*
