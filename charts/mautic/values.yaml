@@ -151,3 +151,11 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+volumes:
+  # - name: favicon
+  #   configMap:
+  #     name: ct-favicon
+volumeMounts:
+  # - name: favicon
+  #   mountPath: /var/www/html/docroot/favicon.ico
+  #   subPath: favicon.ico
