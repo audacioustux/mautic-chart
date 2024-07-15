@@ -56,7 +56,7 @@ Volumes
 {{- define "mautic.volumes" -}}
 {{- with .Values.volumes }}
 {{- toYaml . }}
-{{- end -}}
+{{- end }}
 - name: files
   persistentVolumeClaim:
     claimName: {{ include "mautic.fullname" . }}-files
@@ -83,7 +83,7 @@ Volume mounts
 {{- define "mautic.volumeMounts" -}}
 {{- with .Values.volumeMounts }}
 {{- toYaml . }}
-{{- end -}}
+{{- end }}
 - mountPath: /var/www/html/docroot/media/files
   name: files
 - mountPath: /var/www/html/docroot/media/images
