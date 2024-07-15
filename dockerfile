@@ -35,7 +35,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     nodejs \
     npm
 
-# Clean up apt-get
+# Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -56,13 +56,16 @@ RUN COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_PROCESS_TIMEOUT=10000 composer create-pr
 WORKDIR /opt/mautic
 RUN COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_PROCESS_TIMEOUT=10000 composer require pabloveintimilla/mautic-amazon-ses
 
-# Clean up node_modules
+# Clean up
 RUN rm -rf var/cache/js && \
     find node_modules -mindepth 1 -maxdepth 1 -not \( -name 'jquery' -or -name 'vimeo-froogaloop2' -or -name 'remixicon' \) | xargs rm -rf
 RUN mv node_modules docroot/
 
-RUN mv /opt/mautic /var/www/html
+RUN cp -a /opt/mautic/. /var/www/html/
 WORKDIR /var/www/html
+
+# Clean up
+RUN rm -rf /opt/mautic
 
 # Configure PHP
 ENV PHP_INI_VALUE_DATE_TIMEZONE=UTC \
