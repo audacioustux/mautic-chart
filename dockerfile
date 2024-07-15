@@ -1,4 +1,4 @@
-FROM php:8.1-apache as core
+FROM php:8.1-apache as builder
 
 ARG MAUTIC_VERSION=5.1
 
@@ -47,7 +47,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
-RUN echo "memory_limit = -1" > /usr/local/etc/php/php.ini
+RUN echo "memory_limit=-1" > /usr/local/etc/php/php.ini
 
 # Install Mautic
 WORKDIR /opt
@@ -61,11 +61,37 @@ RUN rm -rf var/cache/js && \
     find node_modules -mindepth 1 -maxdepth 1 -not \( -name 'jquery' -or -name 'vimeo-froogaloop2' -or -name 'remixicon' \) | xargs rm -rf
 RUN mv node_modules docroot/
 
-RUN cp -a /opt/mautic/. /var/www/html/
-WORKDIR /var/www/html
+FROM php:8.1-apache as core
 
-# Clean up
-RUN rm -rf /opt/mautic
+COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
+COPY --from=builder /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
+
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    libcurl4-gnutls-dev \
+    libc-client-dev \
+    libkrb5-dev \
+    libmcrypt-dev \
+    libssl-dev \
+    libxml2-dev \
+    libzip-dev \
+    libjpeg-dev \
+    libmagickwand-dev \
+    libpng-dev \
+    libgif-dev \
+    libtiff-dev \
+    libz-dev \
+    libpq-dev \
+    imagemagick \
+    graphicsmagick \
+    libwebp-dev \
+    libjpeg62-turbo-dev \
+    libxpm-dev \
+    libaprutil1-dev \
+    libicu-dev \
+    libfreetype6-dev \
+    libonig-dev \
+    unzip \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && rm -rf /var/lib/apt/lists/*
 
 # Configure PHP
 ENV PHP_INI_VALUE_DATE_TIMEZONE=UTC \
@@ -75,6 +101,10 @@ ENV PHP_INI_VALUE_DATE_TIMEZONE=UTC \
     PHP_INI_VALUE_MAX_EXECUTION_TIME=300 
 
 COPY ./common/php.ini /usr/local/etc/php/php.ini
+
+WORKDIR /var/www/html
+
+COPY --from=builder --chown=www-data:www-data /opt/mautic .
 
 COPY ./bin/ bin/
 
