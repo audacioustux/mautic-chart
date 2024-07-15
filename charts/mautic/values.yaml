@@ -93,27 +93,27 @@ mautic:
       MAUTIC_DB_PASSWORD: mautic
   
   cron:
-    import:
-      enabled: true
-      schedule: "*/6 * * * *"
-      # limit: 5000
     campaignsRebuild:
       enabled: true
       schedule: "*/5 * * * *"
-      # batchLimit: 5000
-      # maxContacts: 5000
-    segmentsUpdate:
+      # batchLimit: 300
+      maxContacts: 5000
+    import:
       enabled: true
       schedule: "*/4 * * * *"
-      # batchLimit: 5000
-      # maxContacts: 5000
-    campaignsTrigger:
+      limit: 5000
+    segmentsUpdate:
       enabled: true
       schedule: "*/3 * * * *"
-      # batchLimit: 5000
-    broadcastsSend:
+      # batchLimit: 300
+      maxContacts: 5000
+    campaignsTrigger:
       enabled: true
       schedule: "*/2 * * * *"
+      # batchLimit: 100
+    broadcastsSend:
+      enabled: true
+      schedule: "*/1 * * * *"
     messagesSend:
       enabled: true
       schedule: "*/1 * * * *"
