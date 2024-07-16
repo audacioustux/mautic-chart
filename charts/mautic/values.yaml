@@ -32,7 +32,7 @@ mautic:
     # storageClass: "nfs"
 
   web:
-    resources:
+    resources: &resources
       limits:
         memory: 384Mi
       requests:
@@ -71,7 +71,7 @@ mautic:
     siteUrl: "https://localhost:8080"
     resources:
       limits:
-        memory: 256Mi
+        memory: 384Mi
       requests:
         cpu: 100m
         memory: 256Mi
@@ -98,33 +98,42 @@ mautic:
       schedule: "*/5 * * * *"
       # batchLimit: 300
       maxContacts: 5000
+      resources: *resources
     import:
       enabled: true
       schedule: "*/4 * * * *"
       limit: 5000
+      resources: *resources
     segmentsUpdate:
       enabled: true
       schedule: "*/3 * * * *"
       # batchLimit: 300
       maxContacts: 5000
+      resources: *resources
     campaignsTrigger:
       enabled: true
       schedule: "*/2 * * * *"
       # batchLimit: 100
+      resources: *resources
     broadcastsSend:
       enabled: true
       schedule: "*/1 * * * *"
+      resources: *resources
     messagesSend:
       enabled: true
       schedule: "*/1 * * * *"
+      resources: *resources
   
   messenger:
     consumeEmail:
       enabled: true
+      resources: *resources
     consumeFailed:
       enabled: true
+      resources: *resources
     consumeHit:
       enabled: true
+      resources: *resources
 
 service:
   type: ClusterIP

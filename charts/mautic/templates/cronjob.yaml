@@ -27,6 +27,8 @@ spec:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
+            resources:
+              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -67,6 +69,8 @@ spec:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
+            resources:
+              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -101,6 +105,8 @@ spec:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
+            resources:
+              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -139,6 +145,8 @@ spec:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
+            resources:
+              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -169,6 +177,8 @@ spec:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
+            resources:
+              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -199,6 +209,8 @@ spec:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
+            resources:
+              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
