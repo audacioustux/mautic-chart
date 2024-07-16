@@ -141,6 +141,8 @@ spec:
               - --max-contacts
               - "{{ .Values.mautic.cron.campaignsRebuild.maxContacts }}"
               {{- end }}
+              - --lock_mode
+              - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
@@ -173,6 +175,8 @@ spec:
             imagePullPolicy: "{{ .Values.mautic.image.pullPolicy }}"
             args:
               - mautic:broadcasts:send
+              - --lock_mode
+              - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
@@ -205,6 +209,8 @@ spec:
             imagePullPolicy: "{{ .Values.mautic.image.pullPolicy }}"
             args:
               - mautic:messages:send
+              - --lock_mode
+              - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
