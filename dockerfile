@@ -1,37 +1,17 @@
+ARG APT_DEPS="libcurl4-gnutls-dev libc-client-dev libkrb5-dev libmcrypt-dev libssl-dev libxml2-dev libzip-dev libjpeg-dev libmagickwand-dev libpng-dev libgif-dev libtiff-dev libz-dev libpq-dev imagemagick graphicsmagick libwebp-dev libjpeg62-turbo-dev libxpm-dev libaprutil1-dev libicu-dev libfreetype6-dev libonig-dev unzip"
+
 FROM php:8.1-apache as builder
 
 ARG MAUTIC_VERSION=5.1
+ARG APT_DEPS
 
 # Install PHP extensions
 RUN apt-get update && apt-get install --no-install-recommends -y \
+    ${APT_DEPS} \
     ca-certificates \
     build-essential  \
     git \
     curl \
-    libcurl4-gnutls-dev \
-    libc-client-dev \
-    libkrb5-dev \
-    libmcrypt-dev \
-    libssl-dev \
-    libxml2-dev \
-    libzip-dev \
-    libjpeg-dev \
-    libmagickwand-dev \
-    libpng-dev \
-    libgif-dev \
-    libtiff-dev \
-    libz-dev \
-    libpq-dev \
-    imagemagick \
-    graphicsmagick \
-    libwebp-dev \
-    libjpeg62-turbo-dev \
-    libxpm-dev \
-    libaprutil1-dev \
-    libicu-dev \
-    libfreetype6-dev \
-    libonig-dev \
-    unzip \
     nodejs \
     npm
 
@@ -63,34 +43,13 @@ RUN mv node_modules docroot/
 
 FROM php:8.1-apache as core
 
+ARG APT_DEPS
+
 COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
 COPY --from=builder /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    libcurl4-gnutls-dev \
-    libc-client-dev \
-    libkrb5-dev \
-    libmcrypt-dev \
-    libssl-dev \
-    libxml2-dev \
-    libzip-dev \
-    libjpeg-dev \
-    libmagickwand-dev \
-    libpng-dev \
-    libgif-dev \
-    libtiff-dev \
-    libz-dev \
-    libpq-dev \
-    imagemagick \
-    graphicsmagick \
-    libwebp-dev \
-    libjpeg62-turbo-dev \
-    libxpm-dev \
-    libaprutil1-dev \
-    libicu-dev \
-    libfreetype6-dev \
-    libonig-dev \
-    unzip \
+    ${APT_DEPS} \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && rm -rf /var/lib/apt/lists/*
 
 # Configure PHP
