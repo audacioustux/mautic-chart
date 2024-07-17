@@ -32,7 +32,7 @@ mautic:
     # storageClass: "nfs"
 
   web:
-    resources: &resources
+    resources:
       limits:
         memory: 384Mi
       requests:
@@ -73,7 +73,6 @@ mautic:
       limits:
         memory: 384Mi
       requests:
-        cpu: 100m
         memory: 256Mi
 
   db:
@@ -98,7 +97,11 @@ mautic:
       schedule: "*/5 * * * *"
       # batchLimit: 300
       maxContacts: 5000
-      resources: *resources
+      resources: &&resources
+        limits:
+          memory: 256Mi
+        requests:
+          memory: 128Mi
     import:
       enabled: true
       schedule: "*/4 * * * *"
