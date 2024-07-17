@@ -131,12 +131,15 @@ mautic:
     consumeEmail:
       enabled: true
       resources: *resources
+      debug: false
     consumeFailed:
       enabled: true
       resources: *resources
+      debug: false
     consumeHit:
       enabled: true
       resources: *resources
+      debug: false
 
 service:
   type: ClusterIP
