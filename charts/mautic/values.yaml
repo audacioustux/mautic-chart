@@ -97,7 +97,7 @@ mautic:
       schedule: "*/5 * * * *"
       # batchLimit: 300
       maxContacts: 5000
-      resources: &&resources
+      resources: &resources
         limits:
           memory: 256Mi
         requests:
