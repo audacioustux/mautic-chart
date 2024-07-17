@@ -71,9 +71,6 @@ spec:
           args:
             - messenger:consume
             - email
-            {{- if .Values.mautic.messenger.consumeEmail.debug }}
-            - -vv
-            {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
@@ -110,9 +107,6 @@ spec:
           args:
             - messenger:consume
             - hit
-            {{- if .Values.mautic.messenger.consumeHit.debug }}
-            - -vv
-            {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
@@ -149,9 +143,6 @@ spec:
           args:
             - messenger:consume
             - failed
-            {{- if .Values.mautic.messenger.consumeFailed.debug }}
-            - -vv
-            {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
