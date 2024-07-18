@@ -34,10 +34,10 @@ mautic:
   web:
     resources:
       limits:
-        memory: 384Mi
+        memory: 512Mi
       requests:
         cpu: 200m
-        memory: 256Mi
+        memory: 384Mi
     hpa:
       enabled: true
       minReplicas: 1
