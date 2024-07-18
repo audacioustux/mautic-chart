@@ -99,7 +99,7 @@ mautic:
       maxContacts: 5000
       resources: &resources
         limits:
-          memory: 256Mi
+          memory: 384Mi
         requests:
           memory: 128Mi
     import:
