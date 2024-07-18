@@ -72,7 +72,7 @@ spec:
             - messenger:consume
             - email
             {{- if .Values.mautic.messenger.consumeEmail.debug }}
-            - -vv
+            - -vvv
             {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
@@ -111,7 +111,7 @@ spec:
             - messenger:consume
             - hit
             {{- if .Values.mautic.messenger.consumeHit.debug }}
-            - -vv
+            - -vvv
             {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
@@ -150,7 +150,7 @@ spec:
             - messenger:consume
             - failed
             {{- if .Values.mautic.messenger.consumeFailed.debug }}
-            - -vv
+            - -vvv
             {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
