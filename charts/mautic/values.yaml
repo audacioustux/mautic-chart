@@ -95,50 +95,55 @@ mautic:
     campaignsRebuild:
       enabled: true
       schedule: "*/5 * * * *"
-      # batchLimit: 300
+      batchLimit: 300
       maxContacts: 5000
-      resources: &resources
+      resources: &cron_resources
         limits:
-          memory: 384Mi
+          memory: 256Mi
         requests:
           memory: 128Mi
     import:
       enabled: true
       schedule: "*/4 * * * *"
       limit: 5000
-      resources: *resources
+      resources: *cron_resources
     segmentsUpdate:
       enabled: true
       schedule: "*/3 * * * *"
-      # batchLimit: 300
+      batchLimit: 300
       maxContacts: 5000
-      resources: *resources
+      resources: *cron_resources
     campaignsTrigger:
       enabled: true
       schedule: "*/2 * * * *"
-      # batchLimit: 100
-      resources: *resources
+      batchLimit: 100
+      campaignLimit: 500
+      resources: *cron_resources
     broadcastsSend:
       enabled: true
       schedule: "*/1 * * * *"
-      resources: *resources
+      resources: *cron_resources
     messagesSend:
       enabled: true
       schedule: "*/1 * * * *"
-      resources: *resources
+      resources: *cron_resources
   
   messenger:
     consumeEmail:
       enabled: true
-      resources: *resources
+      resources: &message_resources
+        limits:
+          memory: 512Mi
+        requests:
+          memory: 256Mi
       debug: false
     consumeFailed:
       enabled: true
-      resources: *resources
+      resources: *message_resources
       debug: false
     consumeHit:
       enabled: true
-      resources: *resources
+      resources: *message_resources
       debug: false
 
 service:

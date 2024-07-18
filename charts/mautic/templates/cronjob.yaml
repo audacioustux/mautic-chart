@@ -101,6 +101,12 @@ spec:
               - --batch-limit
               - "{{ .Values.mautic.cron.campaignsTrigger.batchLimit }}"
               {{- end }}
+              {{- if .Values.mautic.cron.campaignsTrigger.campaignLimit }}
+              - --campaign-limit
+              - "{{ .Values.mautic.cron.campaignsTrigger.campaignLimit }}"
+              {{- end }}
+              - --lock_mode
+              - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
             volumeMounts:
