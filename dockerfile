@@ -102,5 +102,5 @@ ENV PHP_INI_VALUE_MAX_EXECUTION_TIME=600 \
 
 COPY ./entrypoints/console.sh /entrypoint.sh
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["--help"]
