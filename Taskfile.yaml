@@ -6,7 +6,7 @@ tasks:
       - docker buildx create --name multiarch --bootstrap --use
   docker:build:
     env:
-      VERSION: 5.1.25
+      VERSION: 5.1.26
     cmds:
       - docker build --platform linux/amd64,linux/arm64 --builder=multiarch -t docker.io/tanjim/mautic:install-$VERSION --target=install --push .
       - docker build --platform linux/amd64,linux/arm64 --builder=multiarch -t docker.io/tanjim/mautic:console-$VERSION --target=console --push .

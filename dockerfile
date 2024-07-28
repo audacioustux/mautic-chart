@@ -101,6 +101,7 @@ ENV PHP_INI_VALUE_MAX_EXECUTION_TIME=600 \
     PHP_INI_VALUE_MEMORY_LIMIT=-1
 
 COPY ./entrypoints/console.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["--help"]
