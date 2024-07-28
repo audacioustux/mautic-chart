@@ -100,5 +100,7 @@ FROM core as console
 ENV PHP_INI_VALUE_MAX_EXECUTION_TIME=600 \
     PHP_INI_VALUE_MEMORY_LIMIT=-1
 
-ENTRYPOINT ["php", "bin/console", "--no-interaction", "--no-ansi"]
+COPY ./entrypoints/console.sh /entrypoint.sh
+
+ENTRYPOINT [ "./entrypoint.sh" ]
 CMD ["--help"]

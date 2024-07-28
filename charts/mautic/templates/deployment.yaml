@@ -42,6 +42,15 @@ spec:
             {{- toYaml .Values.mautic.web.resources | nindent 12 }}
           volumeMounts:
             {{- include "mautic.volumeMounts" . | nindent 12 }}
+      {{- with .Values.mautic.web.topologySpreadConstraints }}
+      topologySpreadConstraints:
+      {{- range . }}
+        - {{ . | toYaml | indent 10 | trim }}
+          labelSelector:
+            matchLabels:
+              {{- include "mautic.selectorLabels" $ | nindent 14 }}
+      {{- end }}
+      {{- end }}
       volumes: 
         {{- include "mautic.volumes" . | nindent 8 }}
 ---
