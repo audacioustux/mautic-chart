@@ -83,6 +83,10 @@ spec:
             {{- if .Values.mautic.messenger.consumeEmail.debug }}
             - -vvv
             {{- end }}
+            {{- if .Values.mautic.messenger.consumeEmail.memoryLimit }}
+            - --memory-limit
+            - {{ .Values.mautic.messenger.consumeEmail.memoryLimit }}
+            {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
@@ -122,6 +126,10 @@ spec:
             {{- if .Values.mautic.messenger.consumeHit.debug }}
             - -vvv
             {{- end }}
+            {{- if .Values.mautic.messenger.consumeEmail.memoryLimit }}
+            - --memory-limit
+            - {{ .Values.mautic.messenger.consumeEmail.memoryLimit }}
+            {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
           volumeMounts:
@@ -160,6 +168,10 @@ spec:
             - failed
             {{- if .Values.mautic.messenger.consumeFailed.debug }}
             - -vvv
+            {{- end }}
+            {{- if .Values.mautic.messenger.consumeEmail.memoryLimit }}
+            - --memory-limit
+            - {{ .Values.mautic.messenger.consumeEmail.memoryLimit }}
             {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}

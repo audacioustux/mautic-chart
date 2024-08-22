@@ -140,14 +140,17 @@ mautic:
           memory: 512Mi
         requests:
           memory: 256Mi
+      memoryLimit: "384M"
       debug: false
     consumeFailed:
       enabled: true
       resources: *message_resources
+      memoryLimit: "384M"
       debug: false
     consumeHit:
       enabled: true
       resources: *message_resources
+      memoryLimit: "384M"
       debug: false
 
 service:
