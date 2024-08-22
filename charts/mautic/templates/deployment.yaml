@@ -126,9 +126,9 @@ spec:
             {{- if .Values.mautic.messenger.consumeHit.debug }}
             - -vvv
             {{- end }}
-            {{- if .Values.mautic.messenger.consumeEmail.memoryLimit }}
+            {{- if .Values.mautic.messenger.consumeHit.memoryLimit }}
             - --memory-limit
-            - {{ .Values.mautic.messenger.consumeEmail.memoryLimit }}
+            - {{ .Values.mautic.messenger.consumeHit.memoryLimit }}
             {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
@@ -169,9 +169,9 @@ spec:
             {{- if .Values.mautic.messenger.consumeFailed.debug }}
             - -vvv
             {{- end }}
-            {{- if .Values.mautic.messenger.consumeEmail.memoryLimit }}
+            {{- if .Values.mautic.messenger.consumeFailed.memoryLimit }}
             - --memory-limit
-            - {{ .Values.mautic.messenger.consumeEmail.memoryLimit }}
+            - {{ .Values.mautic.messenger.consumeFailed.memoryLimit }}
             {{- end }}
           envFrom:
             {{- include "mautic.envFrom" . | nindent 12 }}
