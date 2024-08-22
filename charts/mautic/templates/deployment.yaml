@@ -81,7 +81,7 @@ spec:
             - messenger:consume
             - email
             {{- if .Values.mautic.messenger.consumeEmail.debug }}
-            - -vvv
+            - -vv
             {{- end }}
             {{- if .Values.mautic.messenger.consumeEmail.memoryLimit }}
             - --memory-limit
@@ -124,7 +124,7 @@ spec:
             - messenger:consume
             - hit
             {{- if .Values.mautic.messenger.consumeHit.debug }}
-            - -vvv
+            - -vv
             {{- end }}
             {{- if .Values.mautic.messenger.consumeHit.memoryLimit }}
             - --memory-limit
@@ -167,7 +167,7 @@ spec:
             - messenger:consume
             - failed
             {{- if .Values.mautic.messenger.consumeFailed.debug }}
-            - -vvv
+            - -vv
             {{- end }}
             {{- if .Values.mautic.messenger.consumeFailed.memoryLimit }}
             - --memory-limit
