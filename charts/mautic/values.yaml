@@ -113,7 +113,7 @@ mautic:
       resources: *cron_resources
     segmentsUpdate:
       enabled: true
-      schedule: "*/3 * * * *"
+      schedule: "*/10 * * * *"
       batchLimit: 300
       maxContacts: 5000
       resources: *cron_resources
