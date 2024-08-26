@@ -65,10 +65,10 @@ mautic:
       <<: *probe
       failureThreshold: 30
       periodSeconds: 10
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: "kubernetes.io/hostname"
-        whenUnsatisfiable: ScheduleAnyway
+    # topologySpreadConstraints:
+    #   - maxSkew: 1
+    #     topologyKey: "kubernetes.io/hostname"
+    #     whenUnsatisfiable: DoNotSchedule
       
   install:
     # optional, if SITE_URL is not set in configMap
