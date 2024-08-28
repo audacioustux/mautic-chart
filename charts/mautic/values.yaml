@@ -96,36 +96,36 @@ mautic:
       MAUTIC_DB_PASSWORD: mautic
   
   cron:
-    campaignsRebuild:
+    segmentsUpdate:
       enabled: true
-      schedule: "*/5 * * * *"
-      batchLimit: 300
-      maxContacts: 5000
+      schedule: "@hourly"
+      batchLimit: 100
+      # maxContacts: 5000
       resources: &cron_resources
         limits:
           memory: 256Mi
         requests:
           memory: 128Mi
-    import:
+    campaignsRebuild:
       enabled: true
-      schedule: "*/4 * * * *"
-      limit: 5000
-      resources: *cron_resources
-    segmentsUpdate:
-      enabled: true
-      schedule: "*/10 * * * *"
-      batchLimit: 300
-      maxContacts: 5000
+      schedule: "*/30 * * * *"
+      batchLimit: 100
+      # maxContacts: 5000
       resources: *cron_resources
     campaignsTrigger:
       enabled: true
-      schedule: "*/2 * * * *"
+      schedule: "*/20 * * * *"
       batchLimit: 100
-      campaignLimit: 500
+      # campaignLimit: 500
+      resources: *cron_resources
+    import:
+      enabled: true
+      schedule: "*/10 * * * *"
+      # limit: 5000
       resources: *cron_resources
     broadcastsSend:
       enabled: true
-      schedule: "*/1 * * * *"
+      schedule: "*/5 * * * *"
       resources: *cron_resources
     messagesSend:
       enabled: true
