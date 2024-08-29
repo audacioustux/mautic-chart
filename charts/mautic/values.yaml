@@ -96,16 +96,23 @@ mautic:
       MAUTIC_DB_PASSWORD: mautic
   
   cron:
-    segmentsUpdate:
+    campaignsSummarize:
       enabled: true
-      schedule: "@hourly"
-      batchLimit: 100
-      # maxContacts: 5000
+      schedule: "@daily"
+      batchLimit: 1
+      # maxHours: 48
+      # rebuild: true
       resources: &cron_resources
         limits:
           memory: 256Mi
         requests:
           memory: 128Mi
+    segmentsUpdate:
+      enabled: true
+      schedule: "@hourly"
+      batchLimit: 100
+      # maxContacts: 5000
+      resources: *cron_resources
     campaignsRebuild:
       enabled: true
       schedule: "*/30 * * * *"

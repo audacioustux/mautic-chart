@@ -118,6 +118,51 @@ spec:
             {{- include "mautic.volumes" . | nindent 12 }}
 {{- end }}
 ---
+{{- if .Values.mautic.cron.campaignsSummarize.enabled }}
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: {{ include "mautic.fullname" . }}-campaigns-trigger
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "{{ .Values.mautic.cron.campaignsSummarize.schedule }}"
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: console
+            image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
+            imagePullPolicy: "{{ .Values.mautic.image.pullPolicy }}"
+            args:
+              - mautic:campaigns:summarize
+              {{- if .Values.mautic.cron.campaignsSummarize.batchLimit }}
+              - --batch-limit
+              - "{{ .Values.mautic.cron.campaignsSummarize.batchLimit }}"
+              {{- end }}
+              {{- if .Values.mautic.cron.campaignsSummarize.maxHours }}
+              - --max-hours
+              - "{{ .Values.mautic.cron.campaignsSummarize.maxHours }}"
+              {{- end }}
+              {{- if .Values.mautic.cron.campaignsSummarize.rebuild }}
+              - --rebuild
+              {{- end }}
+              - --lock_mode
+              - flock
+            envFrom:
+              {{- include "mautic.envFrom" . | nindent 14 }}
+            volumeMounts:
+              {{- include "mautic.volumeMounts" . | nindent 14 }}
+            resources:
+              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
+          restartPolicy: OnFailure
+          volumes:
+            {{- include "mautic.volumes" . | nindent 12 }}
+{{- end }}
+---
 {{- if .Values.mautic.cron.campaignsRebuild.enabled }}
 kind: CronJob
 apiVersion: batch/v1
