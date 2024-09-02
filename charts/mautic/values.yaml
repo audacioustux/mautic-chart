@@ -5,7 +5,7 @@ mautic:
   image:
     repository: docker.io/tanjim/mautic
     pullPolicy: IfNotPresent
-    tag: "5.1.26"
+    tag: "5.1.27"
 
   # existingConfigMap: ""
   # ignore the following values if existingConfigMap is set
@@ -109,7 +109,7 @@ mautic:
           memory: 128Mi
     segmentsUpdate:
       enabled: true
-      schedule: "@hourly"
+      schedule: "@every 2h"
       batchLimit: 100
       # maxContacts: 5000
       resources: *cron_resources
