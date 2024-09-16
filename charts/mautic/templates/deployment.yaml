@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: {{ include "mautic.fullname" . }}
   labels:
-    {{- include "mautic.labels" . | nindent 4 }}
     mautic/process: web
+    {{- include "mautic.labels" . | nindent 4 }}
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      {{- include "mautic.selectorLabels" . | nindent 6 }}
       mauitc/process: web
+      {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "mautic.labels" . | nindent 8 }}
         mautic/process: web
+        {{- include "mautic.labels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
       containers:
@@ -63,20 +63,20 @@ apiVersion: apps/v1
 metadata:
   name: {{ include "mautic.fullname" . }}-messenger-consume-email
   labels:
-    {{- include "mautic.labels" . | nindent 4 }}
     mautic/process: messenger-consume-email
+    {{- include "mautic.labels" . | nindent 4 }}
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      {{- include "mautic.selectorLabels" . | nindent 6 }}
       mautic/process: messenger-consume-email
+      {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "mautic.labels" . | nindent 8 }}
         mautic/process: messenger-consume-email
+        {{- include "mautic.labels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
       containers:
@@ -109,20 +109,20 @@ apiVersion: apps/v1
 metadata:
   name: {{ include "mautic.fullname" . }}-messenger-consume-hit
   labels:
-    {{- include "mautic.labels" . | nindent 4 }}
     mautic/process: messenger-consume-hit
+    {{- include "mautic.labels" . | nindent 4 }}
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      {{- include "mautic.selectorLabels" . | nindent 6 }}
       mautic/process: messenger-consume-hit
+      {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "mautic.labels" . | nindent 8 }}
         mautic/process: messenger-consume-hit
+        {{- include "mautic.labels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
       containers:
@@ -155,20 +155,20 @@ apiVersion: apps/v1
 metadata:
   name: {{ include "mautic.fullname" . }}-messenger-consume-failed
   labels:
-    {{- include "mautic.labels" . | nindent 4 }}
     mautic/process: messenger-consume-failed
+    {{- include "mautic.labels" . | nindent 4 }}
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      {{- include "mautic.selectorLabels" . | nindent 6 }}
       mautic/process: messenger-consume-failed
+      {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "mautic.labels" . | nindent 8 }}
         mautic/process: messenger-consume-failed
+        {{- include "mautic.labels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
       containers:
