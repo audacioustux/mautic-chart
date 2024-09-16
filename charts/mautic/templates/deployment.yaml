@@ -16,7 +16,7 @@ spec:
     metadata:
       labels:
         mautic/process: web
-        {{- include "mautic.labels" . | nindent 8 }}
+        {{- include "mautic.selectorLabels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
       containers:
@@ -76,7 +76,7 @@ spec:
     metadata:
       labels:
         mautic/process: messenger-consume-email
-        {{- include "mautic.labels" . | nindent 8 }}
+        {{- include "mautic.selectorLabels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
       containers:
@@ -122,7 +122,7 @@ spec:
     metadata:
       labels:
         mautic/process: messenger-consume-hit
-        {{- include "mautic.labels" . | nindent 8 }}
+        {{- include "mautic.selectorLabels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
       containers:
@@ -168,7 +168,7 @@ spec:
     metadata:
       labels:
         mautic/process: messenger-consume-failed
-        {{- include "mautic.labels" . | nindent 8 }}
+        {{- include "mautic.selectorLabels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
       containers:
