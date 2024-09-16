@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "mautic.fullname" . }}
   labels:
-    mautic/process: web
+    process: web
     {{- include "mautic.labels" . | nindent 4 }}
 spec:
   strategy:
@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       labels:
-        mautic/process: web
+        process: web
         {{- include "mautic.selectorLabels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
@@ -63,19 +63,19 @@ apiVersion: apps/v1
 metadata:
   name: {{ include "mautic.fullname" . }}-messenger-consume-email
   labels:
-    mautic/process: messenger-consume-email
+    process: messenger-consume-email
     {{- include "mautic.labels" . | nindent 4 }}
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      mautic/process: messenger-consume-email
+      process: messenger-consume-email
       {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        mautic/process: messenger-consume-email
+        process: messenger-consume-email
         {{- include "mautic.selectorLabels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
@@ -109,19 +109,19 @@ apiVersion: apps/v1
 metadata:
   name: {{ include "mautic.fullname" . }}-messenger-consume-hit
   labels:
-    mautic/process: messenger-consume-hit
+    process: messenger-consume-hit
     {{- include "mautic.labels" . | nindent 4 }}
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      mautic/process: messenger-consume-hit
+      process: messenger-consume-hit
       {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        mautic/process: messenger-consume-hit
+        process: messenger-consume-hit
         {{- include "mautic.selectorLabels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
@@ -155,19 +155,19 @@ apiVersion: apps/v1
 metadata:
   name: {{ include "mautic.fullname" . }}-messenger-consume-failed
   labels:
-    mautic/process: messenger-consume-failed
+    process: messenger-consume-failed
     {{- include "mautic.labels" . | nindent 4 }}
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      mautic/process: messenger-consume-failed
+      process: messenger-consume-failed
       {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        mautic/process: messenger-consume-failed
+        process: messenger-consume-failed
         {{- include "mautic.selectorLabels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
