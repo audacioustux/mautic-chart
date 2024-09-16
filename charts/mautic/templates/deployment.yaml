@@ -4,16 +4,19 @@ metadata:
   name: {{ include "mautic.fullname" . }}
   labels:
     {{- include "mautic.labels" . | nindent 4 }}
+    mautic/process: web
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
       {{- include "mautic.selectorLabels" . | nindent 6 }}
+      mauitc/process: web
   template:
     metadata:
       labels:
         {{- include "mautic.labels" . | nindent 8 }}
+        mautic/process: web
     spec:
       enableServiceLinks: false
       containers:
@@ -61,16 +64,19 @@ metadata:
   name: {{ include "mautic.fullname" . }}-messenger-consume-email
   labels:
     {{- include "mautic.labels" . | nindent 4 }}
+    mautic/process: messenger-consume-email
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
       {{- include "mautic.selectorLabels" . | nindent 6 }}
+      mautic/process: messenger-consume-email
   template:
     metadata:
       labels:
         {{- include "mautic.labels" . | nindent 8 }}
+        mautic/process: messenger-consume-email
     spec:
       enableServiceLinks: false
       containers:
@@ -104,16 +110,19 @@ metadata:
   name: {{ include "mautic.fullname" . }}-messenger-consume-hit
   labels:
     {{- include "mautic.labels" . | nindent 4 }}
+    mautic/process: messenger-consume-hit
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
       {{- include "mautic.selectorLabels" . | nindent 6 }}
+      mautic/process: messenger-consume-hit
   template:
     metadata:
       labels:
         {{- include "mautic.labels" . | nindent 8 }}
+        mautic/process: messenger-consume-hit
     spec:
       enableServiceLinks: false
       containers:
@@ -147,16 +156,19 @@ metadata:
   name: {{ include "mautic.fullname" . }}-messenger-consume-failed
   labels:
     {{- include "mautic.labels" . | nindent 4 }}
+    mautic/process: messenger-consume-failed
 spec:
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
       {{- include "mautic.selectorLabels" . | nindent 6 }}
+      mautic/process: messenger-consume-failed
   template:
     metadata:
       labels:
         {{- include "mautic.labels" . | nindent 8 }}
+        mautic/process: messenger-consume-failed
     spec:
       enableServiceLinks: false
       containers:

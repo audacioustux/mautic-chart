@@ -4,11 +4,13 @@ metadata:
   name: {{ include "mautic.fullname" . }}-install-{{ now | unixEpoch }}
   labels:
     {{- include "mautic.labels" . | nindent 4 }}
+    mautic/process: install
 spec:
   template:
     metadata:
       labels:
         {{- include "mautic.labels" . | nindent 8 }}
+        mautic/process: install
     spec:
       enableServiceLinks: false
       containers:
