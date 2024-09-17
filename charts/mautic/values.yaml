@@ -45,8 +45,8 @@ mautic:
       targetCPU: 60
     vpa:
       enabled: false
-      minMemory: 128Mi
-      maxMemory: 1024Mi
+      minMemory: 256Mi
+      maxMemory: 2Gi
     readinessProbe: &probe
       # check if request to /s/login returns 301 (redirect) status code
       exec:
