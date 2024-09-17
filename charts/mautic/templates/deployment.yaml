@@ -10,7 +10,7 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      mauitc/process: web
+      process: web
       {{- include "mautic.selectorLabels" . | nindent 6 }}
   template:
     metadata:
