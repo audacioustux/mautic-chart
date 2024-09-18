@@ -109,20 +109,20 @@ mautic:
           memory: 128Mi
     segmentsUpdate:
       enabled: true
-      schedule: "@every 2h"
-      batchLimit: 100
+      schedule: "@every 1h"
+      batchLimit: 10
       # maxContacts: 5000
       resources: *cron_resources
     campaignsRebuild:
       enabled: true
       schedule: "*/30 * * * *"
-      batchLimit: 100
+      batchLimit: 10
       # maxContacts: 5000
       resources: *cron_resources
     campaignsTrigger:
       enabled: true
       schedule: "*/20 * * * *"
-      batchLimit: 100
+      batchLimit: 10
       # campaignLimit: 500
       resources: *cron_resources
     import:
