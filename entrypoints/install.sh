@@ -13,6 +13,7 @@ mysql -h ${MAUTIC_DB_HOST:?} -u ${MAUTIC_DB_USER:?} -p${MAUTIC_DB_PASSWORD:?} -e
 
 php bin/sync_config.php
 
+php bin/console cache:clear
 php bin/console mautic:install \
     --no-interaction \
     --force \
