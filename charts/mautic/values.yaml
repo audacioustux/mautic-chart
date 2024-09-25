@@ -113,6 +113,17 @@ mautic:
       batchLimit: 50
       # maxContacts: 5000
       resources: *cron_resources
+    contactsScheduledExport:
+      enabled: true
+      schedule: "@hourly"
+      resources: 
+        limits:
+          memory: 2Gi
+        requests:
+          memory: 1Gi
+      env:
+        - name: PHP_INI_VALUE_MEMORY_LIMIT
+          value: "1536M"
     campaignsRebuild:
       enabled: true
       schedule: "*/30 * * * *"
@@ -130,13 +141,6 @@ mautic:
       schedule: "*/10 * * * *"
       # limit: 5000
       resources: *cron_resources
-    contactsScheduledExport:
-      enabled: true
-      schedule: "*/10 * * * *"
-      resources: *cron_resources
-      env:
-        - name: PHP_INI_VALUE_MEMORY_LIMIT
-          value: "768M"
     broadcastsSend:
       enabled: true
       schedule: "*/5 * * * *"
