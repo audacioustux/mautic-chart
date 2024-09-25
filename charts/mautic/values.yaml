@@ -135,7 +135,8 @@ mautic:
       schedule: "*/10 * * * *"
       resources: *cron_resources
       env:
-        PHP_INI_VALUE_MEMORY_LIMIT: "768M"
+        - name: PHP_INI_VALUE_MEMORY_LIMIT
+          value: "768M"
     broadcastsSend:
       enabled: true
       schedule: "*/5 * * * *"
