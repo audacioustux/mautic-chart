@@ -5,7 +5,7 @@ mautic:
   image:
     repository: docker.io/tanjim/mautic
     pullPolicy: IfNotPresent
-    tag: "5.1.28"
+    tag: "5.1.29"
 
   # existingConfigMap: ""
   # ignore the following values if existingConfigMap is set
@@ -36,16 +36,16 @@ mautic:
       limits:
         memory: 1Gi
       requests:
-        cpu: 500m
-        memory: 512Mi
+        cpu: 200m
+        memory: 768Mi
     hpa:
       enabled: true
       minReplicas: 1
       maxReplicas: 5
-      targetCPU: 60
+      targetCPU: 80
     vpa:
       enabled: false
-      minMemory: 256Mi
+      minMemory: 512Mi
       maxMemory: 2Gi
     readinessProbe: &probe
       # check if request to /s/login returns 301 (redirect) status code
@@ -75,9 +75,9 @@ mautic:
     siteUrl: "https://localhost:8080"
     resources:
       limits:
-        memory: 384Mi
+        memory: 1Gi
       requests:
-        memory: 256Mi
+        memory: 768Mi
 
   db:
     create: true
@@ -104,9 +104,9 @@ mautic:
       # rebuild: true
       resources: &cron_resources
         limits:
-          memory: 512Mi
+          memory: 1Gi
         requests:
-          memory: 128Mi
+          memory: 256Mi
     segmentsUpdate:
       enabled: true
       schedule: "@every 2h"
@@ -130,6 +130,12 @@ mautic:
       schedule: "*/10 * * * *"
       # limit: 5000
       resources: *cron_resources
+    contactsScheduledExport:
+      enabled: true
+      schedule: "*/10 * * * *"
+      resources: *cron_resources
+      env:
+        PHP_INI_VALUE_MEMORY_LIMIT: "768M"
     broadcastsSend:
       enabled: true
       schedule: "*/5 * * * *"

@@ -2,7 +2,7 @@ ARG APT_DEPS="libcurl4-gnutls-dev libc-client-dev libkrb5-dev libmcrypt-dev libs
 
 FROM php:8.1-apache AS builder
 
-ARG MAUTIC_VERSION=5.1
+ARG MAUTIC_VERSION=5.1.1
 ARG APT_DEPS
 
 # Install PHP extensions
@@ -59,7 +59,7 @@ ENV PHP_INI_VALUE_DATE_TIMEZONE=UTC \
     PHP_INI_VALUE_UPLOAD_MAX_FILESIZE=512M \
     PHP_INI_VALUE_POST_MAX_FILESIZE=512M \
     PHP_INI_VALUE_MEMORY_LIMIT=512M \
-    PHP_INI_VALUE_MAX_EXECUTION_TIME=300 
+    PHP_INI_VALUE_MAX_EXECUTION_TIME=600 
 
 COPY ./common/php.ini /usr/local/etc/php/php.ini
 

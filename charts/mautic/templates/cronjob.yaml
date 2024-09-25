@@ -25,6 +25,10 @@ spec:
               {{- end }}
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
+            {{- if .Values.mautic.cron.import.env }}
+            env:
+              {{- toYaml .Values.mautic.cron.import.env | nindent 14 }}
+            {{- end }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
@@ -67,6 +71,10 @@ spec:
               - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
+            {{- if .Values.mautic.cron.segmentsUpdate.env }}
+            env:
+              {{- toYaml .Values.mautic.cron.segmentsUpdate.env | nindent 14 }}
+            {{- end }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
@@ -109,6 +117,10 @@ spec:
               - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
+            {{- if .Values.mautic.cron.campaignsTrigger.env }}
+            env:
+              {{- toYaml .Values.mautic.cron.campaignsTrigger.env | nindent 14 }}
+            {{- end }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
@@ -154,6 +166,10 @@ spec:
               - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
+            {{- if .Values.mautic.cron.campaignsSummarize.env }}
+            env:
+              {{- toYaml .Values.mautic.cron.campaignsSummarize.env | nindent 14 }}
+            {{- end }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
@@ -196,6 +212,10 @@ spec:
               - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
+            {{- if .Values.mautic.cron.campaignsRebuild.env }}
+            env:
+              {{- toYaml .Values.mautic.cron.campaignsRebuild.env | nindent 14 }}
+            {{- end }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
@@ -230,6 +250,10 @@ spec:
               - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
+            {{- if .Values.mautic.cron.broadcastsSend.env }}
+            env:
+              {{- toYaml .Values.mautic.cron.broadcastsSend.env | nindent 14 }}
+            {{- end }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
@@ -264,6 +288,47 @@ spec:
               - flock
             envFrom:
               {{- include "mautic.envFrom" . | nindent 14 }}
+            {{- if .Values.mautic.cron.messagesSend.env }}
+            env:
+              {{- toYaml .Values.mautic.cron.messagesSend.env | nindent 14 }}
+            {{- end }}
+            volumeMounts:
+              {{- include "mautic.volumeMounts" . | nindent 14 }}
+            resources:
+              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
+          restartPolicy: OnFailure
+          volumes:
+            {{- include "mautic.volumes" . | nindent 12 }}
+{{- end }}
+---
+# mautic:contacts:scheduled_export
+{{- if .Values.mautic.cron.contactsScheduledExport.enabled }}
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: {{ include "mautic.fullname" . }}-contacts-scheduled-export
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "{{ .Values.mautic.cron.contactsScheduledExport.schedule }}"
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: console
+            image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
+            imagePullPolicy: "{{ .Values.mautic.image.pullPolicy }}"
+            args:
+              - mautic:contacts:scheduled_export
+            envFrom:
+              {{- include "mautic.envFrom" . | nindent 14 }}
+            {{- if .Values.mautic.cron.contactsScheduledExport.env }}
+            env:
+              {{- toYaml .Values.mautic.cron.contactsScheduledExport.env | nindent 14 }}
+            {{- end }}
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
