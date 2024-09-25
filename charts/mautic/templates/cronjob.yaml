@@ -78,7 +78,7 @@ spec:
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
-              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
+              {{- toYaml .Values.mautic.cron.segmentsUpdate.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -124,7 +124,7 @@ spec:
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
-              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
+              {{- toYaml .Values.mautic.cron.campaignsTrigger.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -173,7 +173,7 @@ spec:
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
-              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
+              {{- toYaml .Values.mautic.cron.campaignsSummarize.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -219,7 +219,7 @@ spec:
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
-              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
+              {{- toYaml .Values.mautic.cron.campaignsRebuild.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -257,7 +257,7 @@ spec:
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
-              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
+              {{- toYaml .Values.mautic.cron.broadcastsSend.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -295,7 +295,7 @@ spec:
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
-              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
+              {{- toYaml .Values.mautic.cron.messagesSend.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
@@ -332,7 +332,7 @@ spec:
             volumeMounts:
               {{- include "mautic.volumeMounts" . | nindent 14 }}
             resources:
-              {{- toYaml .Values.mautic.cron.import.resources | nindent 14 }}
+              {{- toYaml .Values.mautic.cron.contactsScheduledExport.resources | nindent 14 }}
           restartPolicy: OnFailure
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
