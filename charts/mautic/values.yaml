@@ -36,13 +36,13 @@ mautic:
       limits:
         memory: 1Gi
       requests:
-        cpu: 200m
+        cpu: 500m
         memory: 768Mi
     hpa:
       enabled: true
       minReplicas: 1
       maxReplicas: 5
-      targetCPU: 80
+      targetCPU: 60
     vpa:
       enabled: false
       minMemory: 512Mi
