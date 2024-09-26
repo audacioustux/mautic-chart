@@ -114,7 +114,7 @@ mautic:
       resources: *cron_resources
     contactsScheduledExport:
       enabled: true
-      schedule: "@every 4h"
+      schedule: "@every 2h"
       # This job is partially resumable, as it won't resume from where it left off for each contact export
       resources: 
         limits:
@@ -126,7 +126,7 @@ mautic:
           value: "2048M"
     segmentsUpdate:
       enabled: true
-      schedule: "@every 2h"
+      schedule: "@every 1h"
       batchLimit: 50
       # maxContacts: 5000
       resources: *cron_resources
