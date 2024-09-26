@@ -96,34 +96,40 @@ mautic:
       MAUTIC_DB_PASSWORD: mautic
   
   cron:
+    default:
+      # The default resource requests and limits ratio is 1:8, which may cause OOMKilled
+      # So, this limit is only used for resumanble jobs
+      resources: &cron_resources
+        limits:
+          memory: 2Gi
+        requests:
+          memory: 256Mi
+
     campaignsSummarize:
       enabled: true
       schedule: "@daily"
       batchLimit: 1
       # maxHours: 48
       # rebuild: true
-      resources: &cron_resources
+      resources: *cron_resources
+    contactsScheduledExport:
+      enabled: true
+      schedule: "@every 4h"
+      # This job is partially resumable, as it won't resume from where it left off for each contact export
+      resources: 
         limits:
-          memory: 1Gi
+          memory: 4Gi
         requests:
-          memory: 256Mi
+          memory: 1Gi
+      env:
+        - name: PHP_INI_VALUE_MEMORY_LIMIT
+          value: "2048M"
     segmentsUpdate:
       enabled: true
       schedule: "@every 2h"
       batchLimit: 50
       # maxContacts: 5000
       resources: *cron_resources
-    contactsScheduledExport:
-      enabled: true
-      schedule: "@hourly"
-      resources: 
-        limits:
-          memory: 2Gi
-        requests:
-          memory: 1Gi
-      env:
-        - name: PHP_INI_VALUE_MEMORY_LIMIT
-          value: "1536M"
     campaignsRebuild:
       enabled: true
       schedule: "*/30 * * * *"
