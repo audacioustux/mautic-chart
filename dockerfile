@@ -2,7 +2,7 @@ ARG APT_DEPS="libcurl4-gnutls-dev libc-client-dev libkrb5-dev libmcrypt-dev libs
 
 FROM php:8.1-apache AS builder
 
-ARG MAUTIC_VERSION=5.1.1
+ARG MAUTIC_VERSION=5.1
 ARG APT_DEPS
 
 # Install PHP extensions
