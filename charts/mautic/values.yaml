@@ -3,7 +3,7 @@ fullnameOverride: ""
 
 mautic:
   image:
-    repository: docker.io/tanjim/mautic
+    repository: ghcr.io/audacioustux/mautic
     pullPolicy: IfNotPresent
     tag: "5.1.28"
 
