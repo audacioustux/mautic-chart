@@ -5,7 +5,7 @@ mautic:
   image:
     repository: ghcr.io/audacioustux/mautic
     pullPolicy: IfNotPresent
-    tag: "5.1.28"
+    tag: "5.1"
 
   # existingConfigMap: ""
   # ignore the following values if existingConfigMap is set
