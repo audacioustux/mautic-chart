@@ -126,7 +126,7 @@ mautic:
           value: "2048M"
     segmentsUpdate:
       enabled: true
-      schedule: "@every 1h"
+      schedule: "@every 2h"
       batchLimit: 50
       # maxContacts: 5000
       resources: *cron_resources
