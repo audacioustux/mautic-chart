@@ -155,10 +155,16 @@ mautic:
       enabled: true
       schedule: "*/1 * * * *"
       resources: *cron_resources
+    messengerConsumeEmail:
+      enabled: true
+      schedule: "*/1 * * * *"
+      resources: *cron_resources
+      memoryLimit: "256M"
+      limit: 120
   
   messenger:
     consumeEmail:
-      enabled: true
+      enabled: false
       resources: &message_resources
         limits:
           memory: 512Mi

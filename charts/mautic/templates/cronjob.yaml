@@ -337,3 +337,56 @@ spec:
           volumes:
             {{- include "mautic.volumes" . | nindent 12 }}
 {{- end }}
+---
+# messenger:consume email
+{{- if .Values.mautic.cron.messengerConsumeEmail.enabled }}
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: {{ include "mautic.fullname" . }}-messenger-consume-email
+  labels:
+    {{- include "mautic.labels" . | nindent 4 }}
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "{{ .Values.mautic.cron.messengerConsumeEmail.schedule }}"
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: console
+            image: "{{ .Values.mautic.image.repository }}:console-{{ .Values.mautic.image.tag }}"
+            imagePullPolicy: "{{ .Values.mautic.image.pullPolicy }}"
+            args:
+              - messenger:consume
+              - email
+              {{- if .Values.mautic.cron.messengerConsumeEmail.debug }}
+              - -vv
+              {{- end }}
+              {{- if .Values.mautic.cron.messengerConsumeEmail.limit }}
+              - --limit
+              - "{{ .Values.mautic.cron.messengerConsumeEmail.limit }}"
+              {{- end }}
+              {{- if .Values.mautic.cron.messengerConsumeEmail.timeLimit }}
+              - --time-limit
+              - "{{ .Values.mautic.cron.messengerConsumeEmail.timeLimit }}"
+              {{- end }}
+              {{- if .Values.mautic.cron.messengerConsumeEmail.memoryLimit }}
+              - --memory-limit
+              - "{{ .Values.mautic.cron.messengerConsumeEmail.memoryLimit }}"
+              {{- end }}
+            envFrom:
+              {{- include "mautic.envFrom" . | nindent 14 }}
+            {{- if .Values.mautic.cron.messengerConsumeEmail.env }}
+            env:
+              {{- toYaml .Values.mautic.cron.messengerConsumeEmail.env | nindent 14 }}
+            {{- end }}
+            volumeMounts:
+              {{- include "mautic.volumeMounts" . | nindent 14 }}
+            resources:
+              {{- toYaml .Values.mautic.cron.messengerConsumeEmail.resources | nindent 14 }}
+          restartPolicy: OnFailure
+          volumes:
+            {{- include "mautic.volumes" . | nindent 12 }}
+{{- end }}
