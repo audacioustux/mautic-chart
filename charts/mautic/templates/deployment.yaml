@@ -19,6 +19,13 @@ spec:
         {{- include "mautic.selectorLabels" . | nindent 8 }}
     spec:
       enableServiceLinks: false
+      initContainers:
+        - name: init-permissions
+          image: busybox
+          command: ['sh', '-c', 'chown -R www-data:www-data /var/www/html/var && chmod -R 775 /var/www/html/var']
+          volumeMounts:
+            {{- include "mautic.volumeMounts" . | nindent 12 }}
+
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.mautic.image.repository }}:web-{{ .Values.mautic.image.tag }}"
